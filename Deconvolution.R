@@ -15,7 +15,7 @@ CoreAlg <- function(X, y){
         if(i==1){nus <- 0.25}
         if(i==2){nus <- 0.5}
         if(i==3){nus <- 0.75}
-        model<-svm(X,y,type="nu-regression",kernel="linear",nu=nus,scale=F)
+        model <- svm(X,y,type="nu-regression", kernel="linear", nu=nus, scale=F)
         model
     }
 
@@ -25,13 +25,12 @@ CoreAlg <- function(X, y){
     nusvm <- rep(0,svn_itor)
     corrv <- rep(0,svn_itor)
     
-    #do cibersort
     t <- 1
     while(t <= svn_itor) {
         weights = t(out[[t]]$coefs) %*% out[[t]]$SV
         weights[which(weights<0)]<-0
         w<-weights/sum(weights)
-        u <- sweep(X,MARGIN=2,w,'*')
+        u <- sweep(X,MARGIN=2, w, '*')
         k <- apply(u, 1, sum)
         nusvm[t] <- sqrt((mean((k - y)^2)))
         corrv[t] <- cor(k, y)
@@ -61,39 +60,33 @@ doPerm <- function(perm, X, Y){
   Ylist <- as.list(data.matrix(Y))
   dist <- matrix()
   
-  while(itor <= perm){
-    #print(itor)
-    
+  while(itor <= perm){    
     #random mixture
-    yr <- as.numeric(Ylist[sample(length(Ylist),dim(X)[1])])
+    yr <- as.numeric(Ylist[sample(length(Ylist), dim(X)[1])])
     
     #standardize mixture
     yr <- (yr - mean(yr)) / sd(yr)
     
-    #run CIBERSORT core algorithm
-    result <- CoreAlg(X, yr)
-    
+    result <- CoreAlg(X, yr)   
     mix_r <- result$mix_r
     
     #store correlation
     if(itor == 1) {dist <- mix_r}
-    else {dist <- rbind(dist, mix_r)}
-    
+    else {dist <- rbind(dist, mix_r)}   
     itor <- itor + 1
   }
   newList <- list("dist" = dist)
 }
 
 #main function
-CIBERSORT <- function(sig_matrix, mixture_file, perm=0, QN=TRUE, samplename){
+ImmuCC <- function(sig_matrix, mixture_file, perm=0, QN=TRUE, samplename){
   #read in data
   X <- read.csv(sig_matrix, header=T, row.names=1, check.names=F)
-  Y <- read.csv(mixture_file, header=T, row.names=1,check.names=F)
+  Y <- read.csv(mixture_file, header=T, row.names=1, check.names=F)
 
-  Y<-Y[rownames(X)[rownames(X) %in% rownames(Y)],]
+  Y<-Y[rownames(X)[rownames(X) %in% rownames(Y)], ]
   X <- data.matrix(X)
-  Y <- data.matrix(Y)
-  
+  Y <- data.matrix(Y)  
   #order
   X <- X[order(rownames(X)), ]
   Y <- Y[order(rownames(Y)), ]
@@ -115,9 +108,9 @@ CIBERSORT <- function(sig_matrix, mixture_file, perm=0, QN=TRUE, samplename){
   Xgns <- row.names(X)
   Ygns <- row.names(Y)
   YintX <- Ygns %in% Xgns
-  Y <- Y[YintX,]
+  Y <- Y[YintX, ]
   XintY <- Xgns %in% row.names(Y)
-  X <- X[XintY,]
+  X <- X[XintY, ]
   
   #standardize sig matrix
   X <- (X - mean(X)) / sd(as.vector(X))
@@ -127,7 +120,7 @@ CIBERSORT <- function(sig_matrix, mixture_file, perm=0, QN=TRUE, samplename){
   
   #print(nulldist)
   
-  header <- c('Mixture',colnames(X),"P-value","Correlation","RMSE")
+  header <- c('Mixture', colnames(X), "P-value", "Correlation", "RMSE")
   #print(header)
   
   output <- matrix()
@@ -138,7 +131,7 @@ CIBERSORT <- function(sig_matrix, mixture_file, perm=0, QN=TRUE, samplename){
   #iterate through mixtures
   while(itor <= mixtures){
     
-    y <- Y[,itor]
+    y <- Y[, itor]
     
     #standardize mixture
     y <- (y - mean(y)) / sd(y)
@@ -232,7 +225,7 @@ main <- function(mixture_name="ExpressionData.csv", sig_name="signature_matrix(G
   # load in the expression data!
   expression <- read.csv(mixture_name, header=T, row.names=1) 
   # load in the signature matrix!
-  result <- CIBERSORT(sig_matrix=sig, mixture_file = expression, perm=100, QN=T, output_name)
+  result <- ImmuCC(sig_matrix=sig, mixture_file = expression, perm=100, QN=T, output_name)
   
 }
 
