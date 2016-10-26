@@ -15,7 +15,7 @@ CoreAlg <- function(X, y){
         if(i==1){nus <- 0.25}
         if(i==2){nus <- 0.5}
         if(i==3){nus <- 0.75}
-        model <- svm(X,y,type="nu-regression", kernel="linear", nu=nus, scale=F)
+        model <- svm(X, y, type="nu-regression", kernel="linear", nu=nus, scale=F)
         model
     }
 
@@ -28,8 +28,8 @@ CoreAlg <- function(X, y){
     t <- 1
     while(t <= svn_itor) {
         weights = t(out[[t]]$coefs) %*% out[[t]]$SV
-        weights[which(weights<0)]<-0
-        w<-weights/sum(weights)
+        weights[which(weights<0)] <- 0
+        w <- weights/sum(weights)
         u <- sweep(X,MARGIN=2, w, '*')
         k <- apply(u, 1, sum)
         nusvm[t] <- sqrt((mean((k - y)^2)))
@@ -87,13 +87,9 @@ ImmuCC <- function(sig_matrix, mixture_file, perm=0, QN=TRUE, samplename){
   Y<-Y[rownames(X)[rownames(X) %in% rownames(Y)], ]
   X <- data.matrix(X)
   Y <- data.matrix(Y)  
-  #order
-  X <- X[order(rownames(X)), ]
-  Y <- Y[order(rownames(Y)), ]
-  
+    
   P <- perm #number of permutations
-  
-  #anti-log if max < 50 in mixture file
+
   if(max(Y) < 50) {Y <- 2^Y}
   
   #quantile normalization of mixture file
@@ -104,6 +100,7 @@ ImmuCC <- function(sig_matrix, mixture_file, perm=0, QN=TRUE, samplename){
     colnames(Y) <- tmpc
     rownames(Y) <- tmpr
   } 
+    
   #intersect genes
   Xgns <- row.names(X)
   Ygns <- row.names(Y)
@@ -120,7 +117,7 @@ ImmuCC <- function(sig_matrix, mixture_file, perm=0, QN=TRUE, samplename){
   
   #print(nulldist)
   
-  header <- c('Mixture', colnames(X), "P-value", "Correlation", "RMSE")
+  header <- c(colnames(X), "P-value", "Correlation", "RMSE")
   #print(header)
   
   output <- matrix()
@@ -148,24 +145,18 @@ ImmuCC <- function(sig_matrix, mixture_file, perm=0, QN=TRUE, samplename){
     if(P > 0) {pval <- 1 - (which.min(abs(nulldist - mix_r)) / length(nulldist))}
     
     #print output
-    out <- c(colnames(Y)[itor], w*100, pval, mix_r, mix_rmse)
+    out <- c(w*100, pval, mix_r, mix_rmse)
     if(itor == 1) {output <- out}
     else {output <- rbind(output, out)}
     
     itor <- itor + 1
     
-  }
-  
-  #save results
-  write.table(rbind(header, output), file=paste(samplename, "_.txt", sep=""), sep="\t", row.names=F, col.names=F, quote=F)
-  
-  #return matrix object containing all results
-    obj <- output[, -1]
-   # obj <- data.matrix(obj)
-   # rownames(obj) <- colnames(Y)
-   # colnames(obj) <- header
-   # write.csv(obj, file=paste(samplename,"_CIBERSORT-Results.csv"))
-    return(rbind(header, output))
+  } 
+    result <- output
+    colnames(result) <- header
+    rownames(result) <- colnames(Y)
+    write.table(result, file=paste(samplename, "_Results.txt", sep=""), sep="\t", row.names=T, col.names=F, quote=F)
+    result
 }
 
 
