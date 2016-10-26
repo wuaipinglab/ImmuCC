@@ -39,6 +39,13 @@ QP <- function(signature, mixture, use.scale='T', QN="T"){
   cell.number <- ncol(signature)
 
 ## quadratic programming preparation
+# Solves an lsei inverse problem (Least Squares with Equality and Inequality Constraints)
+  
+ #                   \min(||AAx-BB||^2)                          
+ #  subject to:
+ #                    EEx=FF                                    
+ #                    GGx>=HH  
+  
   if (use.scale) {
      AA <- scale(signature)
   } else {
