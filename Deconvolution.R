@@ -199,15 +199,12 @@ cel_expression <- function(){
     write.csv(express, file="ExpressionData.csv", col.names=T, row.names=F)
 }
 
-dir <- ""
-# set work directory
-setwd(dir)
+
 # Convert raw CEL microarray files into expressionSet
 cel_expression()
-output_name <- ""
 options(stringsAsFactors=F)
 ## Main function
-main <- function(mixture_name="ExpressionData.csv", sig_name="signature_matrix(GS).csv", output_name){ 
+main <- function(mixture_name="ExpressionData.csv", sig_name="signature_matrix(GS).csv", output_name=“Result”){ 
 # Argument:
 #     mixture_name: input mixture sample name
 #     sig_name: input signature matrix name
