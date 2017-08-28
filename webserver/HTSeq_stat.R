@@ -1,6 +1,6 @@
 
 
-argv <- commandArgs(TRUE)
+  argv <- commandArgs(TRUE)
   options(stringsAsFactors=F)
 
   #************************************************************************************
@@ -19,12 +19,12 @@ argv <- commandArgs(TRUE)
           if (ncol(temp)==0) temp <- read.table(file, row.names=1, header=F, sep="\t")
           if (file==files[1]) {
               counts <- temp
-              col <- ncol(temp)
-              row <- nrow(temp)
+           #   col <- ncol(temp)
+           #    row <- nrow(temp)
           } else {
               counts <- cbind(counts, temp[rownames(counts), ])
-              col <- c(col, ncol(temp))
-              row <- c(row, nrow(temp))
+           #   col <- c(col, ncol(temp))
+           #   row <- c(row, nrow(temp))
           }
       }
       colnames(counts) <- gsub("\\.txt", "", files)
@@ -104,9 +104,11 @@ argv <- commandArgs(TRUE)
   write.csv(counts.raw, paste(name, ".HTSeqData.csv", sep=""), row.names=T, quote=F)
 
   n <- nrow(counts.raw)
+  index <- grep("ENS", rownames(index))
+  counts.raw <- counts.raw[index, ]
   counts.raw <- counts.raw[1:(n-5), ]
 
-  load("/home/chenziyi/文档/Immune cell deconvolution/RNA-Seq模型/mouseRNASeq/new/script/receptor.ensemble.merge.RData")
+  load("./receptor.ensemble.merge.RData")
   counts.merge <- receptor_merge(counts.raw, gene.list=receptor.ensemble.merge)
   write.csv(counts.merge, paste(name, ".HTSeqData.immuereceptor.csv", sep=""), row.names=T, quote=F)
 
