@@ -1,4 +1,6 @@
 
+#!/bin/bash
+
 ## Directory to the software
 software=""
 
