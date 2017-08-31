@@ -1,8 +1,8 @@
  
-
-##########################################################################################################################################
-###                                                          Affy pre-procession                                            ################
-##########################################################################################################################################
+  options(stringsAsFactors=F)
+########################################################################################################
+##                                    Affy pre-procession                           ################
+########################################################################################################
 
   library(affy)
   library(frma)
@@ -18,13 +18,15 @@
 
 # Output the expression value of samples profiled on array
   ematrix <- exprs(eset)
-write.table(ematrix, "mixture.txt",row.names=F, col.names=F)
+  write.table(ematrix, "mixture.txt",row.names=F, col.names=F)
+  write.csv(ematrix, "mixture.csv")
 
 
-##########################################################################################################################################
-###                                                          Agilent pre-procession                                            ################
-##########################################################################################################################################
-
+######################################################################################################################
+###                              Agilent pre-procession                           ################
+######################################################################################################################
+platform <- ""
+outname <- ""
 #Read the raw txt files
 library(limma)
 
@@ -45,33 +47,36 @@ gene <- y$genes$GeneName
 # mapping information
 mapping <- matrix(c(y$genes$Row, y$genes$Col, y$genes$Start, y$genes$Sequence, y$genes$ProbeUID, 
                   y$genes$ControlType, y$genes$ProbeName, y$genes$GeneName, y$genes$SystematicName, y$genes$Description), ncol=10)
-
 save(mapping, file=paste(platform, "_mapping.RData", sep=""))
 
-# mapping information plus mean expression value of probes
+# mapping information + mean expression value of probes
 expressionStat <- cbind(mapping, rowMeans(y$E))
 
 # Unique gene names
 UniGene <- unique(y$genes$GeneName)
 
-# Choose for the probes for each gene with highest expression value
+# Gene deduplicated
 select <- matrix(nrow=0, ncol=11)
-for (gene in UniGene){
+for (gene in UniGene) {
     cat("Curent Gene is:", gene , "\n")
     temp <- expressionStat[expressionStat[, 8]==gene, ]
     temp <- matrix(temp, ncol=11, byrow=F)
-    if(dim(temp)[1]==1){
+    if (dim(temp)[1]==1) {
         select <- rbind(select, temp)
-    }else{
+    } else {
         temp <- temp[order(temp[, 11], decreasing=T), ]
         select <- rbind(select, temp[1, ])
     }    
 }
 
+# result saving
 colnames(select) <- c(names(y$genes), "MeanValue")
 write.csv(select, paste(platform, "SelectedMapping.csv", sep=""), row.names=F)
+
 rownames(select) <- select[, 7]
 expression <- expression[select[, 7], ]
 rownames(expression) <- select[rownames(expression), 8]
-save(expression, file=paste(platform, "FilterExpressionSet.RData", sep=""))
+#save(expression, file=paste(platform, "FilterExpressionSet.RData", sep=""))
 
+write.table(expression, file=paste(outname, "_ExpressionMatrix.txt", sep=""),row.names=F, col.names=F)
+write.csv(expression, file=paste(outname, "_ExpressionMatrix.csv", sep=""))
