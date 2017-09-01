@@ -4,6 +4,8 @@
   options(stringsAsFactors=F)
 
   #************************************************************************************
+  # Merge multiplt HTSeq results
+
   htseq_merge <- function(){
       # Arguments:
       #    path:path to the input files  
@@ -33,6 +35,8 @@
   }
 
   #************************************************************************************
+  # merge the immune receptor gene subtypes
+
   receptor_merge <- function(expression, gene.list=receptor.ensemble.merge){
       # Arguments:
       #    expression:input expression matrix  
@@ -60,6 +64,7 @@
   }
 
   #************************************************************************************
+  # quartile normalization
   quartile <- function(filename, p){
       # Arguments:
       #    filename:input file name  
