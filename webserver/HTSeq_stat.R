@@ -21,7 +21,7 @@
           if (ncol(temp)==0) temp <- read.table(file, row.names=1, header=F, sep="\t")
           if (file==files[1]) {
               counts <- temp
-           #   col <- ncol(temp)
+           #    col <- ncol(temp)
            #    row <- nrow(temp)
           } else {
               counts <- cbind(counts, temp[rownames(counts), ])
@@ -50,7 +50,7 @@
       for (gene in family) {
           gene.temp <- as.character(unlist(gene.list[gene]))
           gene.temp <- intersect(gene.temp, rownames(expression))
-          cat("The family number of ", gene, " is ",length(gene.temp), "\n")
+          cat("The family number of ", gene, " is ", length(gene.temp), "\n")
           if (length(gene.temp) > 1) {
               expression.temp <- apply(expression[gene.temp, ], 2, sum)
           } else {
@@ -86,7 +86,7 @@
       result <- matrix(nrow=nrow(data), ncol=0)
       for (i in seq(n)) {
           expres <- as.numeric(data[, i])
-          value <- expres[expres!=0]
+          value <- expres[expres != 0]
           value <- sort(value, decreasing=T)
           value.quantile <- quantile(value, p)
           scale <- as.numeric(value.quantile)/1000
