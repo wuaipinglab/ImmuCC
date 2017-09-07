@@ -1,16 +1,20 @@
 
+# Directory to the reference data
 ref=$1
+
+# Directory to the software
 software=$2
 
 ## Directory of the fastq files
 input_path=$3
 
-# Diractory of the RNASeq result
+# Directory of the RNASeq result
 result_path=$4
 
 # name of the expression file
 filename=$5
 
+# Number of threads used
 thread=$6
 
 if [ ! -d "${result_path}/01fastq"]; then
@@ -47,13 +51,13 @@ cd /gluster/home/chenziyi/test/scripts
 #sh 01gunzip.sh ${input_path} ${result_path}/01fastq
 
 ## quality control
-#sh 02qc.sh PE ${result_path} ${software} 24
+#sh 02qc.sh PE ${result_path} ${software} $thread
 
 ## mapping
-sh 03mapping.sh PE ${result_path} ${software} ${ref} 24
+sh 03mapping.sh PE ${result_path} ${software} ${ref} $thread
 
 ## sorting
-sh 04samtools.sh ${result_path} ${software} 24
+sh 04samtools.sh ${result_path} ${software} $thread
 
 ## strandness
 sh 05-1.strand.sh ${result_path} ${result_path}/StrandInfo ${software} ${ref}
