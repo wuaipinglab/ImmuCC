@@ -86,7 +86,8 @@
       result <- matrix(nrow=nrow(data), ncol=0)
       for (i in seq(n)) {
           expres <- as.numeric(data[, i])
-          value <- expres[expres != 0]
+          expres.min <- min(expres)
+          value <- expres[expres != expres.min]
           value <- sort(value, decreasing=T)
           value.quantile <- quantile(value, p)
           scale <- as.numeric(value.quantile)/1000
