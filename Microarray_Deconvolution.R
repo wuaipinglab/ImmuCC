@@ -49,6 +49,7 @@ CEL_ematrix <- function(path){
 
 ImmuCC <- function(expression, training_data='srep40508-s1.csv'){
  # Args:
+   #    expression: expression matrix of sample data.
    #    training_data: signature matrix for deconvlolution.(The training data srep40508-s1.csv can be 
    #                   downloaded from the supplentary material of Sci.Rep.7,40508;doi:10.1038/srep40508(2017))
 
