@@ -23,17 +23,10 @@
 
 # Main function of ImmuCC
 
-ImmuCC <- function(path, training_data='srep40508-s1.csv'){
-
-# Function description: 
-#     All cel files listed under the specified path can be calculated with function 'ImmuCC'.
-
+CEL_ematrix <- function(path){
 # Args:
- #    path: a character denoting the path ReadAffy should look for cel files
-
- #    training_data: signature matrix for deconvlolution.(The training data srep40508-s1.csv can be 
- #                   downloaded from the supplentary material of Sci.Rep.7,40508;doi:10.1038/srep40508(2017))
-
+  #    path: a character denoting the path to cel files
+  
   library(affy)
   library(frma)
   library(mouse4302mmentrezgcdf)
@@ -49,12 +42,21 @@ ImmuCC <- function(path, training_data='srep40508-s1.csv'){
 # Output the expression value of samples profiled on array
   ematrix <- exprs(eset)
   write.table(ematrix, "mixture.txt",row.names=F, col.names=F)
+}
 
-# Load the function of CIBERSORT
-  source("CIBERSORT.R")
-# Note: the scirpts of CIBERSORT.R is a method developed by Newman et al.and can be accesssed upon an request from https://cibersort.stanford.edu/
+# 
+# ematrix <- CEL_ematrix(path)
 
-  perm <- 100
-  results <- CIBERSORT(training_data, 'mixture.txt', perm)
-  results
+ImmuCC <- function(expression, training_data='srep40508-s1.csv'){
+ # Args:
+   #    training_data: signature matrix for deconvlolution.(The training data srep40508-s1.csv can be 
+   #                   downloaded from the supplentary material of Sci.Rep.7,40508;doi:10.1038/srep40508(2017))
+
+ # Load the function of CIBERSORT
+   source("CIBERSORT.R")
+ # Note: the scirpts of CIBERSORT.R is a method developed by Newman et al.and can be accesssed upon an request from https://cibersort.stanford.edu/
+
+    perm <- 100
+    results <- CIBERSORT(training_data, expression, perm)
+    results
 }
