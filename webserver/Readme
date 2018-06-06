@@ -7,7 +7,8 @@ Notes:
    
 3, You should better exambine your data quality from both "old_fastqc" and "new_fastqc" file, because our scripts will run all preprocessing steps at one time. The expression profile of those low quality data (For examble: high duplicating rates, low sequencing length et.al) should be removed as usual RNA-Seq analysis.
 
+To view the online publication, please click here:
+http://journal.frontiersin.org/article/10.3389/fimmu.2018.01286/full?&utm_source=Email_to_authors_&utm_medium=Email&utm_content=T1_11.5e1_author&utm_campaign=Email_publication&field=&journalName=Frontiers_in_Immunology&id=381701
 
-For more detail about RNA-Seq data analysis, please read our paper:
+For using our RNA-Seq data analysis tools, please cite:
 Chen Z, Quan L, Huang A, Zhao Q, Yuan Y, Yuan X, Shen Q, Shang J, Ben Y, Qin FX-F and Wu A (2018) seq-ImmuCC: Cell-Centric View of Tissue Transcriptome Measuring Cellular Compositions of Immune Microenvironment From Mouse RNA-Seq Data. Front. Immunol. 9:1286. doi: 10.3389/fimmu.2018.01286.
-
