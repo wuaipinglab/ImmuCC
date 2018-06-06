@@ -1,6 +1,16 @@
 
 #!/bin/bash
 
+# The scripts in "RNASeq_pipeline.sh" are used to preprocess the RNA-Seq data(from "fastq" to "reads") in four major steps: 
+# quality control; mapping; bam file sorting; quantification.
+# After that, the scripts in "HTSeq_stat.R" were used for merging the expression of immune receptor gene families 
+# and data normalization.
+
+# For more detail about RNA-Seq data analysis, please read our paper:
+# Chen Z, Quan L, Huang A, Zhao Q, Yuan Y, Yuan X, Shen Q, Shang J, Ben Y, Qin FX-F and Wu A (2018) 
+# seq-ImmuCC: Cell-Centric View of Tissue Transcriptome Measuring Cellular Compositions of Immune Microenvironment
+# From Mouse RNA-Seq Data. Front. Immunol. 9:1286. doi: 10.3389/fimmu.2018.01286.
+
 ## Directory to the software
 software=""
 
@@ -11,7 +21,7 @@ adapter=${software}/Trimmomatic-0.35/adapters/TruSeq3-PE.fa
 software_para="2:30:10 LEADING:20 TRAILING:20 SLIDINGWINDOW:4:20 MINLEN:10"
 gtf=${ref}/mm10/New_Mus_musculus.GRCm38.83.V2.gtf
 genome=${ref}/mm10/Mus_musculus.GRCm38.dna.primary_assembly.83.fa 
-star_ref=${ref}/mm10/star_v2
+star_ref=${ref}/mm10/star
 
 fastqc=${software}/FastQC/fastqc
 trim=${software}/Trimmomatic-0.35/trimmomatic-0.35.jar
@@ -92,9 +102,24 @@ $fastqc ${trimm_path}/${sample_name}_trimm_2P -t ${thread} -o ${input_path}/new_
 ## Mapping
 echo "Mapping"
 mkdir ${mapping_path}/${sample_name}
-$star --runMode alignReads --genomeDir ${star_ref} --runThreadN ${thread} --readFilesIn ${trimm_path}/${sample_name}_trimm_1P ${trimm_path}/${sample_name}_trimm_2P --alignIntronMin 20 --alignIntronMax 1000000 --alignMatesGapMax 1000000 --alignSJoverhangMin 8 --alignSJDBoverhangMin 1 --limitBAMsortRAM 99000000000000 --outSAMunmapped Within --outFilterMultimapNmax 1000 --outFilterMismatchNmax 999 --outSAMtype BAM Unsorted --quantMode TranscriptomeSAM --outFileNamePrefix ${mapping_path}/${sample_name}/${sample_name}
+$star --runMode alignReads 
+      --genomeDir ${star_ref} 
+      --runThreadN ${thread} 
+      --readFilesIn ${trimm_path}/${sample_name}_trimm_1P ${trimm_path}/${sample_name}_trimm_2P 
+      --alignIntronMin 20 
+      --alignIntronMax 1000000 
+      --alignMatesGapMax 1000000 
+      --alignSJoverhangMin 8 
+      --alignSJDBoverhangMin 1 
+      --limitBAMsortRAM 99000000000000 
+      --outSAMunmapped Within 
+      --outFilterMultimapNmax 1000 
+      --outFilterMismatchNmax 999 
+      --outSAMtype BAM Unsorted 
+      --quantMode TranscriptomeSAM 
+      --outFileNamePrefix ${mapping_path}/${sample_name}/${sample_name}
 
-## Sort by read name
+## Sort the bam file by read name
 echo "Samtools sorting"
 $samtools sort -@ ${thread} -n -o ${sorted_path}/${samplename}.bam ${mapping_path}/${sample_name}/${sample_name}.bam
 
@@ -134,9 +159,24 @@ $fastqc ${trimm_path}/${sample_name}_trimm -t ${thread} -o ${input_path}/new_fas
 echo "Mapping"
 
 mkdir ${mapping_path}/${sample_name}
-$star --runMode alignReads --genomeDir ${star_ref} --runThreadN ${thread} --readFilesIn ${trimm_path}/${sample_name}_trimm --alignIntronMin 20 --alignIntronMax 1000000 --alignMatesGapMax 1000000 --alignSJoverhangMin 8 --alignSJDBoverhangMin 1 --limitBAMsortRAM 99000000000 --outSAMunmapped Within --outFilterMultimapNmax 1000 --outFilterMismatchNmax 999 --outSAMtype BAM Unsorted --quantMode TranscriptomeSAM --outFileNamePrefix ${mapping_path}/${sample_name}/${sample_name}
+$star --runMode alignReads 
+      --genomeDir ${star_ref} 
+      --runThreadN ${thread} 
+      --readFilesIn ${trimm_path}/${sample_name}_trimm 
+      --alignIntronMin 20 
+      --alignIntronMax 1000000 
+      --alignMatesGapMax 1000000 
+      --alignSJoverhangMin 8 
+      --alignSJDBoverhangMin 1 
+      --limitBAMsortRAM 99000000000 
+      --outSAMunmapped Within 
+      --outFilterMultimapNmax 1000 
+      --outFilterMismatchNmax 999 
+      --outSAMtype BAM Unsorted 
+      --quantMode TranscriptomeSAM 
+      --outFileNamePrefix ${mapping_path}/${sample_name}/${sample_name}
 
-## Sort by read name
+## Sort the bam file by read name
 echo "Samtools sorting"
 $samtools sort -@ ${thread} -n -o ${sorted_path}/${samplename}.bam ${mapping_path}/${sample_name}/${sample_name}.bam
 
