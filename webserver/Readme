@@ -1,7 +1,7 @@
 The scripts in "RNASeq_pipeline.sh" are used to preprocess the RNA-Seq data(from "fastq" to "reads") in four major steps: quality control; mapping; bam file sorting; quantification. After that, the scripts in "HTSeq_stat.R" were used for merging the expression of immune receptor gene families and data normalization.
 
 Notes:
-1, For paired end sequencing data, two fastq files should ended with "_R1.fastq" and "_R2.fastq"; for single end sequencing data, the single fastq file should ended with ".fastq". However, you can also modify our scipt directly.
+1, For paired end sequencing data, the name of two fastq files should be ended with "_R1.fastq" and "_R2.fastq"; for single end sequencing data, the single fastq file should ended with ".fastq". However, you can also modify our scipt directly.
 
 2, You can download the lattest gtf and fastq file to build the reference data because there is duplicate gene symbols in previous versions.
    
