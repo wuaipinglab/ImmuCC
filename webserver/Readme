@@ -1,1 +1,10 @@
+The scripts in "RNASeq_pipeline.sh" are used to preprocess the RNA-Seq data(from "fastq" to "reads") in four major steps: 
+quality control; mapping; bam file sorting; quantification.
+After that, the scripts in "HTSeq_stat.R" were used for merging the expression of immune receptor gene families 
+and data normalization.
+
+For more detail about RNA-Seq data analysis, please read our paper:
+Chen Z, Quan L, Huang A, Zhao Q, Yuan Y, Yuan X, Shen Q, Shang J, Ben Y, Qin FX-F and Wu A (2018) 
+seq-ImmuCC: Cell-Centric View of Tissue Transcriptome Measuring Cellular Compositions of Immune Microenvironment
+From Mouse RNA-Seq Data. Front. Immunol. 9:1286. doi: 10.3389/fimmu.2018.01286.
 
