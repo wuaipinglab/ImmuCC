@@ -11,8 +11,8 @@ Notes:
    previous versions.
    
 3, You should better exambine your data quality from both "old_fastqc" and "new_fastqc" file, because our scripts will run 
-   all preprocessing steps at one time. The expression profile of those low quality data (For examble: duplicating rates, 
-   length distribution et.al) should be removed as usual RNA-Seq analysis.
+   all preprocessing steps at one time. The expression profile of those low quality data (For examble: high duplicating rates, 
+   low sequencing length et.al) should be removed as usual RNA-Seq analysis.
 
 
 For more detail about RNA-Seq data analysis, please read our paper:
