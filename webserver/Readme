@@ -1,22 +1,15 @@
-The scripts in "RNASeq_pipeline.sh" are used to preprocess the RNA-Seq data(from "fastq" to "reads") in four major steps: 
-quality control; mapping; bam file sorting; quantification. After that, the scripts in "HTSeq_stat.R" were used for merging the expression of immune receptor gene families 
+The scripts in "RNASeq_pipeline.sh" are used to preprocess the RNA-Seq data(from "fastq" to "reads") in four major steps: quality control; mapping; bam file sorting; quantification. After that, the scripts in "HTSeq_stat.R" were used for merging the expression of immune receptor gene families 
 and data normalization.
 
 Notes:
-1, For paired end sequencing data, two fastq files should ended with "_R1.fastq" and "_R2.fastq"; 
-   for single end sequencing data, the single fastq file should ended with ".fastq". However, you can also 
+1, For paired end sequencing data, two fastq files should ended with "_R1.fastq" and "_R2.fastq"; for single end sequencing data, the single fastq file should ended with ".fastq". However, you can also 
    modify our scipt directly.
 
-2, you can download the lattest gtf and fastq file to build the reference data because there is duplicate gene symbols in
-   previous versions.
+2, you can download the lattest gtf and fastq file to build the reference data because there is duplicate gene symbols in previous versions.
    
-3, You should better exambine your data quality from both "old_fastqc" and "new_fastqc" file, because our scripts will run 
-   all preprocessing steps at one time. The expression profile of those low quality data (For examble: high duplicating rates, 
-   low sequencing length et.al) should be removed as usual RNA-Seq analysis.
+3, You should better exambine your data quality from both "old_fastqc" and "new_fastqc" file, because our scripts will run all preprocessing steps at one time. The expression profile of those low quality data (For examble: high duplicating rates, low sequencing length et.al) should be removed as usual RNA-Seq analysis.
 
 
 For more detail about RNA-Seq data analysis, please read our paper:
-Chen Z, Quan L, Huang A, Zhao Q, Yuan Y, Yuan X, Shen Q, Shang J, Ben Y, Qin FX-F and Wu A (2018) 
-seq-ImmuCC: Cell-Centric View of Tissue Transcriptome Measuring Cellular Compositions of Immune Microenvironment
-From Mouse RNA-Seq Data. Front. Immunol. 9:1286. doi: 10.3389/fimmu.2018.01286.
+Chen Z, Quan L, Huang A, Zhao Q, Yuan Y, Yuan X, Shen Q, Shang J, Ben Y, Qin FX-F and Wu A (2018) seq-ImmuCC: Cell-Centric View of Tissue Transcriptome Measuring Cellular Compositions of Immune Microenvironment From Mouse RNA-Seq Data. Front. Immunol. 9:1286. doi: 10.3389/fimmu.2018.01286.
 
