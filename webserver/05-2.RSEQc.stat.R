@@ -24,8 +24,8 @@
       strand2 <- as.numeric(strand2)
 
       strandness <- rep("no", length(strand1))
-      strandness[strand1>0.8] <- "reverse"
-      strandness[strand1>0.8] <- "yes"
+      strandness[strand1>0.7] <- "yes"
+      strandness[strand2>0.7] <- "reverse"
 
       result <- data.frame(samplename=samplename,
                            strand1=strand1,
