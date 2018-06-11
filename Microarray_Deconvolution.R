@@ -29,8 +29,8 @@ CEL_ematrix <- function(path){
   
   library(affy)
   library(frma)
-  library(mouse4302mmentrezgcdf)
-  library(mouse4302frmavecs)
+  library(mouse4302mmentrezgcdf) # Version: 19.0.0
+  library(mouse4302frmavecs) # Version: 1.5.0
   library(preprocessCore)
 
 # Read all cel files under path with a custom cdf "mouse4302mmentrezcdf"
