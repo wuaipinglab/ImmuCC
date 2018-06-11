@@ -12,8 +12,15 @@
       cat("There are unknown type files, please check the StrandInfo file!", "\n")
       break
   } else {
-      n <- nrow(data)
-      samplename <- data[seq(1, n, 5), 1]
+      # n <- nrow(data)
+      # samplename <- data[seq(1, n, 5), 1]
+      index1 <- grep('This is', data[, 1])
+      index2 <- grep('Fraction', data[, 1])
+      samplename <- data[-c(index1, index2), 1]
+      sample.index <- which(data[, 1] %in% samplename)
+      inform.range <- c(sample.index[-1], nrow(data)+1)-c(sample.index)
+      samplename <- samplename[inform.range ==5]
+    
       strand1 <- data[grep('\\+\\+,\\-\\-', data[, 1]), 1]
       strand2 <- data[grep("\\+\\-,\\-\\+", data[, 1]), 1]
 
