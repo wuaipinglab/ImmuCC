@@ -2,9 +2,7 @@
 #!/bin/bash
 
 # The scripts in "RNASeq_pipeline.sh" are used to preprocess the RNA-Seq data(from "fastq" to "reads"). The scripts including four major steps: 
-# quality control; mapping; bam file sorting; quantification.
-# After that, the scripts in "HTSeq_stat.R" were used for merging the expression of immune receptor gene families 
-# and data normalization.
+# quality control; mapping; bam file sorting; quantification and normalization.
 
 # For more detail about RNA-Seq data analysis, please read our paper:
 # Chen Z, Quan L, Huang A, Zhao Q, Yuan Y, Yuan X, Shen Q, Shang J, Ben Y, Qin FX-F and Wu A (2018) 
