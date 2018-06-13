@@ -37,7 +37,7 @@ if [ "$library_layout" = "PE" ];then
 for i in $(ls ${fastq_path}/*_1.fastq)
 do
 sample_name=`basename $i|awk -F"_" '{print $1}'`
-sample_end=`basename $i|awk -F"_" '{print $2}'`
+#sample_end=`basename $i|awk -F"_" '{print $2}'`
 #sample_name=`basename $i|sed 's/_1.fastq//'`
 echo ${sample_name}
 
@@ -73,7 +73,7 @@ java -jar $trimmomatic SE -threads ${thread} ${fastq_path}/${sample_name}.fastq 
 $fastqc ${trimm_path}/${sample_name}_trimm -t ${thread} -o ${new_fastqc}
 
 done
-echo "RNASeq finished"
+echo "Quality control finished"
 
 #####################################################################################################
 else
