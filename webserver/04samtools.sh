@@ -1,19 +1,18 @@
 
+# Directory to the software
+samtools=$1
 
 # Directory of the RNASeq result
-result_path=$1
+input_path=$2
 
-## Directory to the software
-software=$2
+# Directory of the RNASeq result
+output_path=$3
 
 # number of threads
-thread=$3
+thread=$4
 
-samtools=${software}/samtools-1.3.1/samtools
-
-for i in $(ls -d ${result_path}/03mapping/*)
+for i in $(ls -d ${input_path}/*)
 do
 samplename=`basename $i`
-$samtools sort -@ $thread -n -o ${result_path}/04sorted/${samplename}.bam ${result_path}/03mapping/${samplename}/${samplename}Aligned.sortedByCoord.out.bam
+$samtools sort -@ $thread -n -o ${output_path}/${samplename}.bam ${input_path}/${samplename}/${samplename}Aligned.out.bam
 done
-
