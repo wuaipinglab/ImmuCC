@@ -15,7 +15,10 @@
 #                          input parameters
 ###############################################################################
 
-## Directory of the base work directory
+# Directory of the base work directory
+# This directory contains the folowing files:
+#     "01fastq", "02trimmed", "03mapping", "04sorted", "05htseq", "raw_fastqc", "old_fastqc"
+# However, they will be create if they are not existed.
 base_dir=$1
 
 # library_layout
@@ -28,9 +31,11 @@ software_path=$3
 ref_path=4
 
 # Directory to the scripts
-script_path=5
+# This directory contains the folowing files:
+#    "01gunzip.sh", "02qc.sh", "03mapping.sh", "04samtools.sh", "05-1.strand.sh", "05-2.RSEQc.stat.R", "06htseq.sh", "MouseHTSeq_counts_stat.R", "receptor.ensemble.merge.RData"
+script_path=$5
 
-# number of threads
+# number of threads to be used
 thread=$6
 
 ###############################################################################
@@ -125,7 +130,5 @@ sh ${script_dir}/06htseq.sh ${base_dir}/04sorted ${base_dir}/05htseq ${base_dir}
 
 ## immune receptor gene merging and normalization
 echo "normalization"
-Rscript ${script_dir}/MouseHTSeq_counts_stat.R ${script_path} ${result_path}/06htseq ${filename}
-
-
+Rscript ${script_dir}/MouseHTSeq_counts_stat.R ${base_dir}/05htseq ${script_dir}/receptor.ensemble.merge.RData ${base_dir}
 
