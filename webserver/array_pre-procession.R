@@ -16,13 +16,13 @@
 # Directory to the result path
   result.path <- ""
 
-# Read all cel files under path with a custom cdf "mouse4302mmentrezcdf"
+# Read all cel files with a custom cdf "mouse4302mmentrezcdf"
   affydata <- ReadAffy(celfile.path=cel.path, cdf="mouse4302mmentrezcdf")
 
 # Preprocessing with frma
   eset <- frma(affydata)
 
-# Output the expression value of samples profiled on array
+# Get the expression profile of all samples
   ematrix <- exprs(eset)
 
 # svae the expression profile
@@ -52,7 +52,7 @@ library(limma)
 #Read the raw txt files
   x <- read.maimages(filename, source="agilent", green.only=TRUE)
 
-# Background correct and normalize
+# Background correction and normalization
   y <- backgroundCorrect(x, method="normexp")
   y <- normalizeBetweenArrays(y, method="quantile")
   expression <-y$E
@@ -64,7 +64,7 @@ library(limma)
 
 # Extract the mapping information
   mapping <- matrix(c(y$genes$Row, y$genes$Col, y$genes$Start, y$genes$Sequence, y$genes$ProbeUID, 
-                  y$genes$ControlType, y$genes$ProbeName, y$genes$GeneName, y$genes$SystematicName, y$genes$Description), ncol=10)
+                    y$genes$ControlType, y$genes$ProbeName, y$genes$GeneName, y$genes$SystematicName, y$genes$Description), ncol=10)
   save(mapping, file=paste(result.path, platform, "_mapping.RData", sep=""))
 
 # mapping information + probe mean expression values
@@ -73,7 +73,7 @@ library(limma)
 # Get the unique gene names
   UniGene <- unique(y$genes$GeneName)
 
-# Gene deduplicated
+# Remove the duplicated genes
   select <- matrix(nrow=0, ncol=11)
   for (gene in UniGene) {
       cat("Curent Gene is:", gene , "\n")
@@ -94,8 +94,8 @@ library(limma)
   rownames(select) <- select[, 7]
   expression <- expression[select[, 7], ]
   rownames(expression) <- select[rownames(expression), 8]
-# save(expression, file=paste(platform, "FilterExpressionSet.RData", sep=""))
 
 # svae the expression profile
+  colnames(expression) <- gsub("\\..*", "", colnames(expression))
   write.table(expression, file=paste(result.path, outname, "_ExpressionMatrix.txt", sep=""),row.names=F, col.names=F)
   write.csv(expression, file=paste(result.path, outname, "_ExpressionMatrix.csv", sep=""))
