@@ -3,13 +3,24 @@
   argv <- commandArgs(TRUE)
   options(stringsAsFactors=F)
 
+# Directory to the htseq result
+  htseq.path <- as.character(argv[1])
+
+# Directory to the file which contains list of immune receptor genes
+  immuneGene.path <- as.character(argv[2])
+
+# Directory to the final result
+  result.path <- as.character(argv[3])
+  
+
   #************************************************************************************
   # Merge multiplt HTSeq results
 
-  htseq_merge <- function(){
+  htseq_merge <- function(data.path){
       # Arguments:
-      #    path:path to the input files  
-
+      #    data.path:path to the individual HTSeq result files  
+    
+      setwd(data.path)
       options(stringsAsFactors=F)
       files <- list.files()
       files <- files[grep("txt", files)]
@@ -100,25 +111,24 @@
       result
   }
 
-
-
   #################################################################################
-  setwd(as.character(argv[1]))
 
-  counts.raw <- htseq_merge()
+  # 
+  counts.raw <- htseq_merge(htseq.path)
   name <- "MouseTissue"
-  write.csv(counts.raw, paste(name, ".HTSeqData.csv", sep=""), row.names=T, quote=F)
-
+  write.csv(counts.raw, paste(result.path, name, ".Raw.HTSeqData.csv", sep=""), row.names=T)
   n <- nrow(counts.raw)
   index <- grep("ENS", rownames(index))
   counts.raw <- counts.raw[index, ]
-  counts.raw <- counts.raw[1:(n-5), ]
 
-  load("./receptor.ensemble.merge.RData")
+  #
+  load(immuneGene.path)
   counts.merge <- receptor_merge(counts.raw, gene.list=receptor.ensemble.merge)
-  write.csv(counts.merge, paste(name, ".HTSeqData.immuereceptor.csv", sep=""), row.names=T, quote=F)
+  write.csv(counts.merge, paste(result.path, name, ".HTSeqData.immuereceptorMerged.csv", sep=""), row.names=T)
 
+  # normalization
+  # The normaliazed data named "counts.quatile" is the input file needed for our web server
   p <- 0.75
   counts.quatile <- quartile(counts.merge, p)
-  write.csv(counts.quatile, paste(name, ".HTSeqData.immuereceptor.quartileNorm.csv", sep=""), row.names=T, quote=F)
+  write.csv(counts.quatile, paste(result.path, name, ".HTSeqData.immuereceptorMerged.quartileNorm.csv", sep=""), row.names=T)
   
