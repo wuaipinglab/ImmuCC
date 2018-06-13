@@ -11,184 +11,121 @@
 # seq-ImmuCC: Cell-Centric View of Tissue Transcriptome Measuring Cellular Compositions of Immune Microenvironment
 # From Mouse RNA-Seq Data. Front. Immunol. 9:1286. doi: 10.3389/fimmu.2018.01286.
 
-## Directory to the software
-software=""
+###############################################################################
+#                          input parameters
+###############################################################################
 
-# Directory to the refernce file
-ref=""
+## Directory of the base work directory
+base_dir=$1
 
-adapter=${software}/Trimmomatic-0.35/adapters/TruSeq3-PE.fa
-software_para="2:30:10 LEADING:20 TRAILING:20 SLIDINGWINDOW:4:20 MINLEN:10"
-gtf=${ref}/mm10/New_Mus_musculus.GRCm38.83.V2.gtf
-genome=${ref}/mm10/Mus_musculus.GRCm38.dna.primary_assembly.83.fa 
-star_ref=${ref}/mm10/star
+# library_layout
+library_layout=$2
 
-fastqc=${software}/FastQC/fastqc
-trim=${software}/Trimmomatic-0.35/trimmomatic-0.35.jar
-star=${software}/STAR/bin/Linux_x86_64/STAR
-samtools=${software}/samtools-1.3.1/samtools
-htseq_count=${software}/htseq-count
+# Directory to the software
+software_path=$3
 
-#
-library_layout=$1
+# Directory to the reference
+ref_path=4
 
-
-input_path=$2
-
-# whether the data is from a strand-specific assay. Specify 'yes', 'no', or 'reverse'
-strand=$3
+# Directory to the scripts
+script_path=5
 
 # number of threads
-thread=24
+thread=$6
+
+###############################################################################
+gtf=${ref_path}/New_Mus_musculus.GRCm38.83.gtf
+genome=${ref_path}/Mus_musculus.GRCm38.dna.primary_assembly.83.fa
+star_ref=${ref_path}/star
+RSeQC_ref=${ref_path}/GRCm38_mm10_Ensembl.bed
+
+trimmomatic=${software_path}/Trimmomatic-0.35/trimmomatic-0.35.jar
+trimmomatic_adapter=${software_path}/Trimmomatic-0.35/adapters/TruSeq3-PE.fa
+trimmomatic_software_para="2:30:10 LEADING:20 TRAILING:20 SLIDINGWINDOW:4:20 MINLEN:10"
+fastqc=${software_path}/FastQC/fastqc
+star=${software_path}/STAR/bin/Linux_x86_64/STAR
+samtools=${software_path}/samtools-1.3.1/samtools
+infer_experiment=${software_path}/RSeQC-2.6.3/scripts/infer_experiment.py
+htseq=${software_path}/htseq-count
 
 
-if [ ! -d "${input_path}/02trimmed" ]; then  
-　　mkdir ${input_path}/02trimmed  
+if [ ! -d "${base_dir}/01fastq" ]; then
+mkdir ${base_dir}/01fastq
 fi
 
-if [ ! -d "${input_path}/03mapping" ]; then  
-　　mkdir ${input_path}/03mapping 
+if [ ! -d "${base_dir}/02trimmed" ]; then
+mkdir ${base_dir}/02trimmed
 fi
 
-if [ ! -d "${input_path}/04sorted" ]; then  
-　　mkdir ${input_path}/04sorted 
+if [ ! -d "${base_dir}/03mapping" ]; then
+mkdir ${base_dir}/03mapping
 fi
 
-if [ ! -d "${input_path}/05htseq" ]; then  
-　　mkdir ${input_path}/05htseq 
+if [ ! -d "${base_dir}/04sorted" ]; then
+mkdir ${base_dir}/04sorted
 fi
 
-# 
-if [ ! -d "${star_ref}" ]; then  
-  mkdir ${star_ref}
-  $star --runThreadN ${thread} \
-        --runMode genomeGenerate \
-        --genomeDir ${star_ref} \
-        --genomeFastaFiles ${genome} \
-        --sjdbGTFfile ${gtf} \
-        --sjdbOverhang 100
+if [ ! -d "${base_dir}/05htseq" ]; then
+mkdir ${base_dir}/05htseq
 fi
 
-############################################################################################################################### 
-#                                                Paired end sequencing
-###############################################################################################################################
-if [ "$library_layout" = "PE" ];then
+if [ ! -d "${base_dir}/raw_fastqc" ]; then
+mkdir ${base_dir}/raw_fastqc
+fi
 
-fastq_path=${input_path}/01fastq
-trimm_path=${input_path}/02trimmed
-mapping_path=${input_path}/03mapping
-sorted_path=${input_path}/04sorted
-htseq_path=${input_path}/05htseq
+if [ ! -d "${base_dir}/new_fastqc" ]; then
+mkdir ${base_dir}/new_fastqc
+fi
 
-for i in $(ls ${fastq_path}/*_R1.fastq)
-do
-
-##sample_name=`basename $i|awk -F"_" '{print $1}'`
-sample_name=`basename $i|sed 's/_R1.fastq//'`
-echo ${sample_name}
-echo "Quality Control begin"
-
-## Quality stat of raw samples
-$fastqc ${fastq_path}/${sample_name}_R1.fastq -t ${thread} -o ${input_path}/raw_fastqc 
-$fastqc ${fastq_path}/${sample_name}_R2.fastq -t ${thread} -o ${input_path}/raw_fastqc
-
-## Remove low quality reads and trimm adapters
-java -jar $trim PE -threads ${thread} ${fastq_path}/${sample_name}_R1.fastq ${fastq_path}/${sample_name}_R2.fastq -baseout ${trimm_path}/${sample_name}_trimm ILLUMINACLIP:$adapter:${software_para}
-
-## Quality stat after QC
-$fastqc ${trimm_path}/${sample_name}_trimm_1P -t ${thread} -o ${input_path}/new_fastqc 
-$fastqc ${trimm_path}/${sample_name}_trimm_2P -t ${thread} -o ${input_path}/new_fastqc
-
-## Mapping
-echo "Mapping"
-mkdir ${mapping_path}/${sample_name}
-$star --runMode alignReads 
-      --genomeDir ${star_ref} 
-      --runThreadN ${thread} 
-      --readFilesIn ${trimm_path}/${sample_name}_trimm_1P ${trimm_path}/${sample_name}_trimm_2P 
-      --alignIntronMin 20 
-      --alignIntronMax 1000000 
-      --alignMatesGapMax 1000000 
-      --alignSJoverhangMin 8 
-      --alignSJDBoverhangMin 1 
-      --limitBAMsortRAM 99000000000000 
-      --outSAMunmapped Within 
-      --outFilterMultimapNmax 1000 
-      --outFilterMismatchNmax 999 
-      --outSAMtype BAM Unsorted 
-      --quantMode TranscriptomeSAM 
-      --outFileNamePrefix ${mapping_path}/${sample_name}/${sample_name}
-
-## Sort the bam file by read name
-echo "Samtools sorting"
-$samtools sort -@ ${thread} -n -o ${sorted_path}/${samplename}.bam ${mapping_path}/${sample_name}/${sample_name}.bam
-
-## Quantification with HTSeq
-echo "Quantification"
-python $htseq_count -f bam -t gene -m union -s $strand ${sorted_path}/${sample_name}.bam ${gtf} >${htseq_path}/${sample_name}.txt
-done
-echo "RNASeq finished"
-
-############################################################################################################################### 
-#                                                Single end sequencing
-###############################################################################################################################
-elif [ "$library_layout" = "SE" ];then
-fastq_path=${input_path}/01fastq
-trimm_path=${input_path}/02trimmed
-mapping_path=${input_path}/03mapping
-sorted_path=${input_path}/04sorted
-htseq_path=${input_path}/05htseq
-
-for i in $(ls ${fastq_path}/*.fastq)
-do
-#sample_name=`basename $i|awk -F"_" '{print $1}'`
-sample_name=`basename $i|sed 's/.fastq//'`
-echo ${sample_name}
-echo "Quality Control begin"
-
-## Quality stat of raw samples
-$fastqc ${fastq_path}/${sample_name}.fastq -t ${thread} -o ${input_path}/raw_fastqc 
-
-## Remove low quality reads and trimm adapters
-java -jar $trim SE -threads ${thread} ${fastq_path}/${sample_name}.fastq ${trimm_path}/${sample_name}_trimm ILLUMINACLIP:$adapter:${software_para}
-
-## Quality stat after QC
-$fastqc ${trimm_path}/${sample_name}_trimm -t ${thread} -o ${input_path}/new_fastqc
-
-## Mapping
-echo "Mapping"
-
-mkdir ${mapping_path}/${sample_name}
-$star --runMode alignReads 
-      --genomeDir ${star_ref} 
-      --runThreadN ${thread} 
-      --readFilesIn ${trimm_path}/${sample_name}_trimm 
-      --alignIntronMin 20 
-      --alignIntronMax 1000000 
-      --alignMatesGapMax 1000000 
-      --alignSJoverhangMin 8 
-      --alignSJDBoverhangMin 1 
-      --limitBAMsortRAM 99000000000 
-      --outSAMunmapped Within 
-      --outFilterMultimapNmax 1000 
-      --outFilterMismatchNmax 999 
-      --outSAMtype BAM Unsorted 
-      --quantMode TranscriptomeSAM 
-      --outFileNamePrefix ${mapping_path}/${sample_name}/${sample_name}
-
-## Sort the bam file by read name
-echo "Samtools sorting"
-$samtools sort -@ ${thread} -n -o ${sorted_path}/${samplename}.bam ${mapping_path}/${sample_name}/${sample_name}.bam
-
-## Quantification with HTSeq
-echo "Quantification"
-python $htseq_count -f bam -t gene -m union -s $strand ${sorted_path}/${sample_name}.bam ${gtf} >${htseq_path}/${sample_name}.txt
-
-done
-echo "RNASeq finished"
 
 #####################################################################################################
-else
-cd ~
-echo "error" > error.log
+# 
+if [ ! -d "${star_ref}" ]; then
+mkdir ${star_ref}
+$star --runThreadN ${thread} \
+      --runMode genomeGenerate \
+      --genomeDir ${star_ref} \
+      --genomeFastaFiles ${genome} \
+      --sjdbGTFfile ${gtf} \
+      --sjdbOverhang 100
 fi
+
+## gunzip the *.gz files
+echo "quality control"
+# sh 01gunzip.sh ${input_path}/01fastq ${result_path}/01fastq
+
+## gunzip the files
+echo "SRA to fastq\n"
+# sh ${script_dir}/00sra_fastq.sh ${input_path}/00sra ${result_path}/01fastq
+
+## quality control
+echo "quality control\n"
+sh ${script_dir}/02qc.sh ${library_layout} ${base_dir}/01fastq ${base_dir}/02trimmed ${fastqc} ${trimmomatic} ${trimmomatic_adapter} ${base_dir}/raw_fastqc ${base_dir}/new_fastqc ${thread}
+
+## mapping
+echo "mapping"
+sh ${script_dir}/03mapping.sh ${library_layout} ${base_dir}/02trimmed ${base_dir}/03mapping ${star} ${star_ref} ${thread}
+
+## sorting
+echo "Bam sorting"
+sh ${script_dir}/04samtools.sh ${samtools} ${base_dir}/03mapping ${base_dir}/04sorted ${thread}
+
+## Get the strandness information
+echo "strandness"
+#sh ${script_dir}/05-1.strand.sh ${base_dir}/04sorted  ${base_dir}/StrandInfo ${infer_experiment} ${RSeQC_ref}
+Rscript ${script_dir}/05-2.RSEQc.stat.R ${base_dir}/StrandInfo ${base_dir}/strand.txt
+
+## quantification with HTSeq
+echo "HTSeq" 
+sh ${script_dir}/06htseq.sh ${base_dir}/04sorted ${base_dir}/05htseq ${base_dir}/strand.txt ${htseq} ${gtf} 
+
+# quantification with RSEM
+#echo "RSEM"
+#sh ${script_dir}/07rsem.sh ${base_dir}/03mapping ${base_dir}/06rsem ${base_dir}/strand.txt ${rsem} ${rsem_ref} ${thread}
+
+## immune receptor gene merging and normalization
+echo "normalization"
+Rscript ${script_dir}/MouseHTSeq_counts_stat.R ${script_path} ${result_path}/06htseq ${filename}
+
+
+
