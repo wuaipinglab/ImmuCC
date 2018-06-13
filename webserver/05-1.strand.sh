@@ -1,25 +1,21 @@
 
-# Directory of the RNASeq result
-result_path=$1
+# Directory of the sorted bam files
+input_path=$1
 
 ## out file name of strand information
 out_name=$2
 
-## Directory to the software
-software=$3
+## Directory to the infer_experiment in RSeQC
+infer_experiment=$3
 
-# Directory to the refernce file
-ref=$4
-
-ref=${ref}/GRCm38_mm10_Ensembl.bed
-infer_experiment=${software}/RSeQC-2.6.3/scripts/infer_experiment.py
-
+# Directory to the RSeQC refernce bed file
+RSeQC_ref=$4
 
 #####################################################################################################
-for i in $(ls ${result_path}/04sorted/*bam)
+for i in $(ls ${input_path}/*bam)
 do
 sample_name=`basename $i|sed 's/.bam//'`
 echo ${sample_name}
-python ${infer_experiment} -r ${ref} -i ${result_path}/04sorted/${sample_name}.bam
+python ${infer_experiment} -r ${RSeQC_ref} -i ${input_path}/${sample_name}.bam
 
 done >${out_name}
