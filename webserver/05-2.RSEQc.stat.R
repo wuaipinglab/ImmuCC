@@ -29,11 +29,17 @@
 
       strand1 <- as.numeric(strand1)
       strand2 <- as.numeric(strand2)
-
+    
+      # Samples of low quality. Strandness information is ambiguous
+      note <- rep("no", length(strand1))
+      note[strand1<0.7 & strand1>=0.6] <- "low Quality"
+    
+      # Strandness parameter for HTSeq
       strandness1 <- rep("no", length(strand1))
       strandness1[strand2>0.7] <- "reverse"
       strandness1[strand1>0.7] <- "yes"
-
+    
+      # Strandness parameter for RSEM
       strandness2 <- rep("none", length(strand1))
       strandness2[strand2>0.7] <- "reverse"
       strandness2[strand1>0.7] <- "forward"
@@ -42,7 +48,8 @@
                            strand1=strand1,
                            strand2=strand2,
                            strandness1=strandness1,
-                           strandness2=strandness2
+                           strandness2=strandness2,
+                           Notation=note
       )
       write.table(result, outfile, quote=F, row.names=F, col.names=F)
 
