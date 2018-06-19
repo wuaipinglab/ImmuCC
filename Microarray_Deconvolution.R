@@ -32,7 +32,7 @@ CEL_ematrix <- function(path){
   library(mouse4302mmentrezgcdf)     # Version: 19.0.0
   library(mouse4302frmavecs)         # Version: 1.5.0
   library(preprocessCore)            # Version: 1.40.0
- # Note: the library version listed here is only the package version I used in my work. However, you can choose the correspondent version based on the R installed in your computer and it will have no impact on the result.
+ # Note: the library version listed here is the package versions used in my work. However, you can choose the correspondent version based on the R installed in your computer and it will have no impact on the result.
   
 # Read all cel files under path with a custom cdf "mouse4302mmentrezcdf"
   affydata <- ReadAffy(celfile.path=path, cdf="mouse4302mmentrezcdf")
