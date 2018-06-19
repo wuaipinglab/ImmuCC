@@ -37,7 +37,7 @@ script_path=$5
 thread=$6
 
 ###############################################################################
-gtf=${ref_path}/New_Mus_musculus.GRCm38.83.gtf
+gtf=${ref_path}/Mus_musculus.GRCm38.83.gtf
 genome=${ref_path}/Mus_musculus.GRCm38.dna.primary_assembly.83.fa
 star_ref=${ref_path}/star
 RSeQC_ref=${ref_path}/GRCm38_mm10_Ensembl.bed
@@ -97,7 +97,7 @@ fi
 echo "quality control"
 # sh 01gunzip.sh ${input_path}/01fastq ${result_path}/01fastq
 
-## gunzip the files
+## transform the sra format data into fastq format data
 echo "SRA to fastq\n"
 # sh ${script_dir}/00sra_fastq.sh ${input_path}/00sra ${result_path}/01fastq
 
@@ -115,7 +115,7 @@ sh ${script_dir}/04samtools.sh ${samtools} ${base_dir}/03mapping ${base_dir}/04s
 
 ## Get the strandness information
 echo "strandness"
-#sh ${script_dir}/05-1.strand.sh ${base_dir}/04sorted  ${base_dir}/StrandInfo ${infer_experiment} ${RSeQC_ref}
+sh ${script_dir}/05-1.strand.sh ${base_dir}/04sorted  ${base_dir}/StrandInfo ${infer_experiment} ${RSeQC_ref}
 Rscript ${script_dir}/05-2.RSEQc.stat.R ${base_dir}/StrandInfo ${base_dir}/strand.txt
 
 ## quantification with HTSeq
