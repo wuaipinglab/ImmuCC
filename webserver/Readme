@@ -1,13 +1,13 @@
 The scripts in "RNASeq_pipeline.sh" are used to preprocess the RNA-Seq data(from "fastq" to "reads") in four major steps: quality control; mapping; bam file sorting; quantification. After that, the scripts in "HTSeq_stat.R" were used for merging the expression of immune receptor gene families and data normalization.
 
 Notes:
-1, For paired end sequencing data, the name of two fastq files should be ended with "_1.fastq" and "_2.fastq"; for single end sequencing data, the name for the single fastq file should ended with ".fastq". However, you can also modify our scipt according to your data.
+1, For paired end sequencing data, the name of two fastq files should be ended with "_1.fastq" and "_2.fastq"; for single end sequencing data, the name for the single fastq file should ended with ".fastq". However, you can also modify our script according to your data.
 
 2, You can download the lattest gtf and fastq file to build the reference data because there is duplicate gene symbols in previous versions.
    
-3, You should better examine your data quality accrording to the result in the file of "old_fastqc" and "new_fastqc". As our scripts will run all preprocessing steps at one time, the expression profile of those low quality data (For examble: high duplicating rates, low sequencing length et.al) should be removed as usual RNA-Seq analysis.
+3, You should better examine your data quality accrording to the result in the directory of "old_fastqc" and "new_fastqc". As our scripts will run all preprocessing steps at one time, the expression profile of those low quality data (For examble: high duplicating rates, low sequencing length et.al) should be removed as usual RNA-Seq analysis.
 
-4, You should make sure the number of intersection genes bewteen our signature matrix and the expression profile of your sample is enough. You'd better process the raw sequencing data according to our pipeline here.
+4, You should make sure the common genes bewteen our signature matrix and the expression profile of your sample is enough. You'd better process the raw sequencing data according to our pipeline here.
 
 To view the online publication, please click here:
 http://journal.frontiersin.org/article/10.3389/fimmu.2018.01286/full?&utm_source=Email_to_authors_&utm_medium=Email&utm_content=T1_11.5e1_author&utm_campaign=Email_publication&field=&journalName=Frontiers_in_Immunology&id=381701
