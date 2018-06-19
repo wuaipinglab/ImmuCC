@@ -43,6 +43,7 @@ CEL_ematrix <- function(path){
 # Output the expression value of samples profiled on array
   ematrix <- exprs(eset)
   write.table(ematrix, "mixture.txt",row.names=F, col.names=F)
+  ematrix
 }
 
 # 
