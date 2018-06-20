@@ -9,7 +9,7 @@ Notes:
 
 4, You should make sure the common genes bewteen our signature matrix and the expression profile of your sample is enough. You'd better process the raw sequencing data according to our pipeline here.
 
-
+5, The matrix of your transcriptomal data should be separated by ",", "/t" or " " and the duplicated gene names should be removed before submit your job to our server.
 
 
 To view the online publication, please click here:
