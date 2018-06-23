@@ -13,9 +13,9 @@
   result.path <- as.character(argv[3])
 
   #************************************************************************************
+  #  Merge the individual htseq result files into one
   htseq_merge <- function(){
       # Arguments:
-      #    path:path to the input files  
 
       options(stringsAsFactors=F)
       files <- list.files()
@@ -40,6 +40,7 @@
   }
 
   #************************************************************************************
+  # Merge immune receptor genes into one
   receptor_merge <- function(expression, gene.list=receptor.ensemble.merge){
       # Arguments:
       #    expression:input expression matrix  
@@ -67,11 +68,11 @@
   }
 
   #************************************************************************************
+  # quantile normalization
   quartile <- function(filename, p) {
       # Arguments:
       #    filename:input file name  
       #    p: quantile
-      #    outname: output file name
 
       options(stringsAsFactors=F)
       if (is.data.frame(filename)|is.matrix(filename)) {
@@ -114,14 +115,14 @@
   setwd(data.path)
 
   counts.raw <- htseq_merge()
-  #write.csv(counts.raw, paste(name, ".HTSeqData.csv", sep=""), row.names=T, quote=F)
+  # write.csv(counts.raw, paste(name, ".HTSeqData.csv", sep=""), row.names=T, quote=F)
 
   n <- nrow(counts.raw)
   gene <- grep("ENS", rownames(counts.raw))
   counts.raw <- counts.raw[gene, ]
 
   counts.merge <- receptor_merge(counts.raw, gene.list=receptor.ensemble.merge)
-  #write.csv(counts.merge, paste(name, ".HTSeqData.immuereceptor.csv", sep=""), row.names=T, quote=F)
+  # write.csv(counts.merge, paste(name, ".HTSeqData.immuereceptor.csv", sep=""), row.names=T, quote=F)
 
   p <- 0.75
   counts.quatile <- quartile(counts.merge, p)
