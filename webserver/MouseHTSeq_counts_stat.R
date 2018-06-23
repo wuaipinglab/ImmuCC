@@ -4,10 +4,13 @@
   options(stringsAsFactors=F)
 
 # Directory to the htseq result
-  htseq.path <- as.character(argv[1])
+  data.path <- as.character(argv[1])
 
-  argv <- commandArgs(TRUE)
-  options(stringsAsFactors=F)
+# path to "receptor.ensemble.merge.RData"
+  receptor.ensemble.merge <- as.character(argv[2])
+
+# # Directory to the final normaliazed result
+  result.path <- as.character(argv[3])
 
   #************************************************************************************
   htseq_merge <- function(){
@@ -18,7 +21,6 @@
       files <- list.files()
       files <- files[grep("txt", files)]
 
-      #files <- files[grep("SRX", files)]
       for (file in files) {
           cat(file, "\n")
           temp <- read.table(file, row.names=1, header=F, sep="")
@@ -35,7 +37,6 @@
       }
       colnames(counts) <- gsub("\\.txt", "", files)
       counts
-
   }
 
   #************************************************************************************
@@ -78,7 +79,7 @@
       } else {
           if (file.exists(filename)) {
               if (grep("csv", filename)==1)      { data <- read.csv(filename, row.names=1)} 
-              else if (grep("txt", filename)==1) { data <- read.csv(filename, row.names=1)}
+              else if (grep("txt", filename)==1) { data <- read.table(filename, row.names=1,header=T)}
               else { break }
           }
       }
@@ -103,10 +104,6 @@
 
 
   #################################################################################
-
-  data.path <- as.character(argv[1])
-  receptor.ensemble.merge <- as.character(argv[2])
-  result.path <- as.character(argv[3])
 
   setwd(data.path)
   if ("receptor.ensemble.merge.RData" %in% list.files()) {
