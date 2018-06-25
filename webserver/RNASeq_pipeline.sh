@@ -13,44 +13,57 @@
 #                          input parameters
 ###############################################################################
 
-# Directory of the base work directory
+# Base directory
 # This directory contains the folowing files:
 #     "01fastq", "02trimmed", "03mapping", "04sorted", "05htseq", "raw_fastqc", "old_fastqc"
-# However, they will be create if they are not existed.
+# However, it will be create if the file was not existed.
+# et.al: /gluster/home/chenziyi/MouseData
 base_dir=$1
 
-# library_layout
+# library_layout (PE | SE)
+# "PE" for paired end sequencing and "SE" for paired end sequencing
+# et.al: PE
 library_layout=$2
 
 # Directory to the software
+# et.al: /gluster/home/chenziyi/software
 software_path=$3
 
 # Directory to the reference
+# et.al: /gluster/home/chenziyi/ref
 ref_path=4
 
 # Directory to the scripts
 # This directory contains the folowing files:
 #    "01gunzip.sh", "02qc.sh", "03mapping.sh", "04samtools.sh", "05-1.strand.sh", "05-2.RSEQc.stat.R", "06htseq.sh", "MouseHTSeq_counts_stat.R", "receptor.ensemble.merge.RData"
+# et.al: /gluster/home/chenziyi/script/RNA-Seq/star
 script_path=$5
 
 # number of threads to be used
+# et.al: 24
 thread=$6
 
 ###############################################################################
 gtf=${ref_path}/Mus_musculus.GRCm38.83.gtf
+# et.al: wget -c ftp://ftp.ensembl.org/pub/release-92/gtf/mus_musculus/Mus_musculus.GRCm38.92.gtf.gz
+
 genome=${ref_path}/Mus_musculus.GRCm38.dna.primary_assembly.83.fa
-star_ref=${ref_path}/star
+# wget -c ftp://ftp.ensembl.org/pub/release-92/fasta/mus_musculus/dna/Mus_musculus.GRCm38.dna.primary_assembly.fa.gz
+
 RSeQC_ref=${ref_path}/GRCm38_mm10_Ensembl.bed
+# wget http://dldcc-web.brc.bcm.edu/lilab/liguow/RSeQC/dat/GRCm38_mm10_Ensembl.bed.gz
+
+star_ref=${ref_path}/star
 
 trimmomatic=${software_path}/Trimmomatic-0.35/trimmomatic-0.35.jar
 trimmomatic_adapter=${software_path}/Trimmomatic-0.35/adapters/TruSeq3-PE.fa
 trimmomatic_software_para="2:30:10 LEADING:20 TRAILING:20 SLIDINGWINDOW:4:20 MINLEN:10"
+
 fastqc=${software_path}/FastQC/fastqc
 star=${software_path}/STAR/bin/Linux_x86_64/STAR
 samtools=${software_path}/samtools-1.3.1/samtools
 infer_experiment=${software_path}/RSeQC-2.6.3/scripts/infer_experiment.py
 htseq=${software_path}/htseq-count
-
 
 if [ ! -d "${base_dir}/01fastq" ]; then
 mkdir ${base_dir}/01fastq
