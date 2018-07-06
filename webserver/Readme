@@ -11,6 +11,7 @@ Notes:
 
 5, The matrix of your transcriptomal data should be separated by ",", "/t" or " " and the duplicated gene names should be removed before submit your job to our server.
 
+6，If you cannnot access our webserver from the link:http://wap-lab.org:3200/immune/, you can open from: http://218.4.234.74:3200/immune/
 
 To view the online publication, please click here:
 http://journal.frontiersin.org/article/10.3389/fimmu.2018.01286/full?&utm_source=Email_to_authors_&utm_medium=Email&utm_content=T1_11.5e1_author&utm_campaign=Email_publication&field=&journalName=Frontiers_in_Immunology&id=381701
