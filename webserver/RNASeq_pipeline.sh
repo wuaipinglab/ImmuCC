@@ -4,10 +4,19 @@
 # The scripts in "RNASeq_pipeline.sh" are used to preprocess the RNA-Seq data(from "fastq" to "reads"). The scripts including four major steps: 
 # quality control; mapping; bam file sorting; quantification and normalization.
 
+
+###############################################################################
 # For more detail about RNA-Seq data analysis, please read our paper:
 # Chen Z, Quan L, Huang A, Zhao Q, Yuan Y, Yuan X, Shen Q, Shang J, Ben Y, Qin FX-F and Wu A (2018) 
 # seq-ImmuCC: Cell-Centric View of Tissue Transcriptome Measuring Cellular Compositions of Immune Microenvironment
 # From Mouse RNA-Seq Data. Front. Immunol. 9:1286. doi: 10.3389/fimmu.2018.01286.
+
+
+###############################################################################
+# If you cannnot access our webserver from the link:http://wap-lab.org:3200/immune/, you can open from: http://218.4.234.74:3200/immune/
+
+
+
 
 ###############################################################################
 #                          input parameters
