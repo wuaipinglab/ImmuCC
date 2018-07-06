@@ -13,7 +13,7 @@
 
 
 ###############################################################################
-# If you cannnot access our webserver from the link:http://wap-lab.org:3200/immune/, you can open from: http://218.4.234.74:3200/immune/
+# If you cannnot access our webserver from the link: http://wap-lab.org:3200/immune/, you can open from: http://218.4.234.74:3200/immune/
 
 
 
