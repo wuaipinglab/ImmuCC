@@ -1,4 +1,4 @@
-Notes:
+Notes for your sample data:
 
 1, NA should not be in the first column.
 
