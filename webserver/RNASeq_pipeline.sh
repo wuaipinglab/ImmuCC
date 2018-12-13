@@ -4,53 +4,52 @@
 # The scripts in "RNASeq_pipeline.sh" are used to preprocess the RNA-Seq data(from "fastq" to "reads"). The scripts including four major steps: 
 # quality control; mapping; bam file sorting; quantification and normalization.
 
-
 ###############################################################################
 # For more detail about RNA-Seq data analysis, please read our paper:
 # Chen Z, Quan L, Huang A, Zhao Q, Yuan Y, Yuan X, Shen Q, Shang J, Ben Y, Qin FX-F and Wu A (2018) 
 # seq-ImmuCC: Cell-Centric View of Tissue Transcriptome Measuring Cellular Compositions of Immune Microenvironment
 # From Mouse RNA-Seq Data. Front. Immunol. 9:1286. doi: 10.3389/fimmu.2018.01286.
 
-
 ###############################################################################
 # If you cannnot access our webserver from the link: http://wap-lab.org:3200/immune/, you can open from: http://218.4.234.74:3200/immune/
 
 # If the results page URL emailed to you can not open, please do not shut down the work page and download the result directly from this site.
 
-
-
 ###############################################################################
 #                          input parameters
 ###############################################################################
 
+############################################################
 # Base directory
 # This directory contains the folowing files:
 #     "01fastq", "02trimmed", "03mapping", "04sorted", "05htseq", "raw_fastqc", "old_fastqc"
 # However, it will be create if the file was not existed.
-
 base_dir=$1                              # Examble: /gluster/home/chenziyi/MouseData
 
+############################################################
 # library_layout (PE | SE)
 # "PE" for paired end sequencing and "SE" for paired end sequencing
-
 library_layout=$2                        # Examble: PE
 
+############################################################
 # Directory to the software
 software_path=$3                         # Examble: /gluster/home/chenziyi/software
 
+############################################################
 # Directory to the reference
 ref_path=4                               # Examble: /gluster/home/chenziyi/ref
 
+############################################################
 # Directory to the scripts
 # This directory contains the folowing files:
 #    "01gunzip.sh", "02qc.sh", "03mapping.sh", "04samtools.sh", "05-1.strand.sh", "05-2.RSEQc.stat.R", "06htseq.sh", "MouseHTSeq_counts_stat.R", "receptor.ensemble.merge.RData"
-
 script_path=$5                           # Examble: /gluster/home/chenziyi/script/RNA-Seq/star
 
+############################################################
 # number of threads to be used
 thread=$6                                # Examble: 24
 
-###############################################################################
+############################################################
 gtf=${ref_path}/Mus_musculus.GRCm38.83.gtf
 # wget -c ftp://ftp.ensembl.org/pub/release-92/gtf/mus_musculus/Mus_musculus.GRCm38.92.gtf.gz
 
@@ -60,6 +59,7 @@ genome=${ref_path}/Mus_musculus.GRCm38.dna.primary_assembly.83.fa
 RSeQC_ref=${ref_path}/GRCm38_mm10_Ensembl.bed
 # wget http://dldcc-web.brc.bcm.edu/lilab/liguow/RSeQC/dat/GRCm38_mm10_Ensembl.bed.gz
 
+############################################################
 star_ref=${ref_path}/star
 
 trimmomatic=${software_path}/Trimmomatic-0.35/trimmomatic-0.35.jar
@@ -72,6 +72,7 @@ samtools=${software_path}/samtools-1.3.1/samtools
 infer_experiment=${software_path}/RSeQC-2.6.3/scripts/infer_experiment.py
 htseq=${software_path}/htseq-count
 
+############################################################
 if [ ! -d "${base_dir}/01fastq" ]; then
 mkdir ${base_dir}/01fastq
 fi
@@ -99,7 +100,6 @@ fi
 if [ ! -d "${base_dir}/new_fastqc" ]; then
 mkdir ${base_dir}/new_fastqc
 fi
-
 
 #####################################################################################################
 # 
