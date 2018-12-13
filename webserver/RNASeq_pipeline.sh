@@ -15,6 +15,7 @@
 ###############################################################################
 # If you cannnot access our webserver from the link: http://wap-lab.org:3200/immune/, you can open from: http://218.4.234.74:3200/immune/
 
+# If the results page URL emailed to you can not open, please do not shut down the work page and download the result directly from this site.
 
 
 
