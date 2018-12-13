@@ -13,7 +13,6 @@ htseq=$4
 # Directory to the refernce file
 gtf=$5
 
-
 #####################################################################################################
 for i in $(ls ${input_path}/*.bam)
 do
@@ -22,3 +21,4 @@ strand=`cat $strand_file|grep $sample_name|awk -F" " '{print $4}'`
 #echo "python $htseq -f bam -t gene -m union -s $strand ${input_path}/${sample_name}.bam ${gtf} >${output_path}/${sample_name}.txt"
 python $htseq -f bam -t gene -m union -s $strand ${input_path}/${sample_name}.bam ${gtf} >${output_path}/${sample_name}.txt
 done  
+
