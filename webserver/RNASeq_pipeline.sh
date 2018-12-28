@@ -73,9 +73,9 @@ infer_experiment=${software_path}/RSeQC-2.6.3/scripts/infer_experiment.py
 htseq=${software_path}/htseq-count
 
 ############################################################
-if [ ! -d "${base_dir}/01fastq" ]; then
-mkdir ${base_dir}/01fastq
-fi
+#if [ ! -d "${base_dir}/01fastq" ]; then
+#mkdir ${base_dir}/01fastq
+#fi
 
 if [ ! -d "${base_dir}/02trimmed" ]; then
 mkdir ${base_dir}/02trimmed
@@ -114,11 +114,11 @@ $star --runThreadN ${thread} \
 fi
 
 ## gunzip the *.gz files
-echo "quality control"
+# echo "Gunzip..."
 # sh 01gunzip.sh ${input_path}/01fastq ${result_path}/01fastq
 
 ## transform the sra format data into fastq format data
-echo "SRA to fastq\n"
+# echo "Transform SRA to fastq\n"
 # sh ${script_dir}/00sra_fastq.sh ${input_path}/00sra ${result_path}/01fastq
 
 ## quality control
