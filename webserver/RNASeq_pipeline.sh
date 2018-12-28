@@ -57,7 +57,7 @@ genome=${ref_path}/Mus_musculus.GRCm38.dna.primary_assembly.83.fa
 # wget -c ftp://ftp.ensembl.org/pub/release-92/fasta/mus_musculus/dna/Mus_musculus.GRCm38.dna.primary_assembly.fa.gz
 
 RSeQC_ref=${ref_path}/GRCm38_mm10_Ensembl.bed
-# wget http://dldcc-web.brc.bcm.edu/lilab/liguow/RSeQC/dat/GRCm38_mm10_Ensembl.bed.gz
+# wget -c http://dldcc-web.brc.bcm.edu/lilab/liguow/RSeQC/dat/GRCm38_mm10_Ensembl.bed.gz
 
 ############################################################
 star_ref=${ref_path}/star
