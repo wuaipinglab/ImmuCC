@@ -24,12 +24,12 @@
 # This directory contains the folowing files:
 #     "01fastq", "02trimmed", "03mapping", "04sorted", "05htseq", "raw_fastqc", "old_fastqc"
 # However, it will be create if the file was not existed.
-base_dir=$1                              # Examble: /gluster/home/chenziyi/MouseData
+base_dir=$1                              # Example: /gluster/home/chenziyi/MouseData
 
 ############################################################
 # library_layout (PE | SE)
-# "PE" for paired end sequencing and "SE" for paired end sequencing
-library_layout=$2                        # Examble: PE
+# "PE" for paired end sequencing and "SE" for single end sequencing
+library_layout=$2                        # Example: PE
 
 ############################################################
 # Directory to the software
@@ -37,17 +37,17 @@ software_path=$3                         # Examble: /gluster/home/chenziyi/softw
 
 ############################################################
 # Directory to the reference
-ref_path=4                               # Examble: /gluster/home/chenziyi/ref
+ref_path=4                               # Example: /gluster/home/chenziyi/ref
 
 ############################################################
 # Directory to the scripts
 # This directory contains the folowing files:
 #    "01gunzip.sh", "02qc.sh", "03mapping.sh", "04samtools.sh", "05-1.strand.sh", "05-2.RSEQc.stat.R", "06htseq.sh", "MouseHTSeq_counts_stat.R", "receptor.ensemble.merge.RData"
-script_path=$5                           # Examble: /gluster/home/chenziyi/script/RNA-Seq/star
+script_path=$5                           # Example: /gluster/home/chenziyi/script/RNA-Seq/star
 
 ############################################################
 # number of threads to be used
-thread=$6                                # Examble: 24
+thread=$6                                # Example: 24
 
 ############################################################
 gtf=${ref_path}/Mus_musculus.GRCm38.83.gtf
