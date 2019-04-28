@@ -1,1 +1,8 @@
 
+Dependencies:
+1, The pipeline for preprocessing bulk RNA-Seq data were the same as the methods used in Seq-ImmuCC which was available at our web site
+https://github.com/wuaipinglab/ImmuCC/tree/master/webserver. The fastq format transcriptome sequencing data can be analysed with it to produce the gene expression matrix of your sample.
+
+2, The tissue specific training signature matrix constructed in our tissue specific model were available at https://github.com/wuaipinglab/ImmuCC/tree/master/tissue_immucc/SignatureMatrix. You can download the correspondent training signature matrix according to the tissue of your sample.
+
+3, With the  
