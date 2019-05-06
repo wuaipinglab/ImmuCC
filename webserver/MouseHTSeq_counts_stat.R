@@ -1,4 +1,7 @@
-
+########################################################################
+# Subtypes of T cell receptor and B cell receptors were merged into major families and 
+# the raw expression matrix were normalized with the quantile normalization method.
+#########################################################################
 
   argv <- commandArgs(TRUE)
   options(stringsAsFactors=F)
