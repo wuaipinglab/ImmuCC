@@ -1,3 +1,6 @@
+################################################
+# Sort the mapped reads according to their name
+################################################
 
 # Directory to the software
 samtools=$1
