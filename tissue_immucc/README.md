@@ -28,6 +28,7 @@ Methods to preprocess the bulk RNA-Seq data were the same as what we used in `se
 ------------------------------------------------------------------------------
 E.g. To estimate the immune cell proportion from the transcriptome of lung, the lung specific signature matrix was used.
 `Immune.proportion <- ImmuCC (expression, training_data = ”Lung.sig.matrix.csv”)`
+
 `expression`: transcriptome profile of biological sample
 `traing_data`： training signature matrix
 
