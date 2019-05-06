@@ -1,4 +1,6 @@
-
+################################################
+#             Quality control
+################################################
 
 Note: For paired end sequencing data, the raw fastq files should be ended with *_1.fastq and *_2.fastq
 
