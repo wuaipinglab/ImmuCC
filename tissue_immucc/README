@@ -8,8 +8,7 @@ This repository contains the dependencies on how to run our tissue specific mode
 3.	At the R prompt: Install the following R packages by issuing command:
 install.packages(c(“e1071”, “preprocessCore”, “”))  
 
-After that you can run the following commands to see whether it has been successfully installed.                   
- library(mouse4302mmentrezgcdf)     
+After that you can run the following commands to see whether it has been successfully installed.                        
  library(e1071)        
  library(preprocessCore) 
  
