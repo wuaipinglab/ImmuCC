@@ -1,3 +1,6 @@
+################################################
+# Mapping reads into the reference genome with STAR
+################################################
 
 # PE for Paired end sequencing and SE for Singlen end sequencing
 library_layout=$1
