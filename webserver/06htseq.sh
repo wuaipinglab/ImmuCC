@@ -1,3 +1,7 @@
+###############################################
+#  Quantify Gene expression with HTSeq
+################################################
+
 # Directory of the sorted BAM file
 input_path=$1
 
