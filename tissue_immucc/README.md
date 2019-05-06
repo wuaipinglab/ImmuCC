@@ -30,6 +30,7 @@ E.g. To estimate the immune cell proportion from the transcriptome of lung, the 
 `Immune.proportion <- ImmuCC (expression, training_data = ”Lung.sig.matrix.csv”)`
 
 `expression`: transcriptome profile of biological sample;
+
 `traing_data`： training signature matrix;
 
 4.Output for the calculated result
