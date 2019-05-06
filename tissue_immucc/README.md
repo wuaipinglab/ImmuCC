@@ -1,7 +1,8 @@
 This repository contains the dependencies to the tissue specific computational tool
+=============
 
 1.Dependencies
-=============
+--------------
 ##software
 ---------
 1.	R -- Install R from https://cran.r-project.org/.
