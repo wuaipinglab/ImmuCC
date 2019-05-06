@@ -1,3 +1,6 @@
+################################################
+#  Get the strand information for the library
+################################################
 
 # Directory of the sorted bam files
 input_path=$1
