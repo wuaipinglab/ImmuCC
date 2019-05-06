@@ -22,12 +22,12 @@ After that you can run the following commands to see whether it has been success
 
 2.preprocess the raw RNA-Seq data
 ------------------------------------
-Methods to preprocess the RNA-Seq data were the same as what we used in `seq_ImmuCC`. The scripts on how to transform the fastq format sequencing data into the expression matrix were listed in https://github.com/wuaipinglab/ImmuCC/tree/master/webserver
+Methods to preprocess the bulk RNA-Seq data were the same as what we used in `seq_ImmuCC`. The scripts on how to transform the fastq format sequencing data into the expression matrix were listed in https://github.com/wuaipinglab/ImmuCC/tree/master/webserver
 
 3.estimate tissue immune cell proportion with tissue specific model
 ------------------------------------------------------------------------------
 E.g. To estimate the immune cell proportion from the transcriptome of lung, the lung specific signature matrix was used.
-Immune.proportion <- ImmuCC (expression, training_data = ”Lung.sig.matrix.csv”)
+`Immune.proportion <- ImmuCC (expression, training_data = ”Lung.sig.matrix.csv”)`
 
 4.Output for the calculated result
 --------
