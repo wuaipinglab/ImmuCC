@@ -20,19 +20,21 @@ After that you can run the following commands to see whether it has been success
 2.	Scirpts of `CIBERSORT.R` can be accessed from https://cibersort.stanford.edu/ upon an request from `CIBERSORT` team.
 3.	Tissue specific signature matrix can be downloaded at: https://github.com/wuaipinglab/ImmuCC/tree/master/tissue_immucc/SignatureMatrix
 
+
 2 How to estimate tissue immune cell proportion
 ---------------------------------------------
-2.1 How to reprocess the raw RNA-Seq data
+2.1 Preprocess the raw RNA-Seq data
 ------------------------------------
 Methods to preprocess the bulk RNA-Seq data were the same as what we used in `seq_ImmuCC`. The shell scripts on how to transform the fastq format sequencing data into the expression matrix were available at https://github.com/wuaipinglab/ImmuCC/tree/master/webserver
 
-2.2 How to estimate tissue immune cell proportion with tissue specific model
+2.2 Estimate tissue immune cell proportion with tissue specific model
 ------------------------------------------------------------------------------
 E.g. when estimating the relative proportion between different immune cells from the transcriptome of lung, the lung specific signature matrix was used.
 `Immune.proportion <- ImmuCC (expression, training_data = ”Lung.sig.matrix.csv”)`
 
 #expression: transcriptome profile of biological sample;
 #traing_data： training signature matrix;
+
 
 3.Output of the calculated result
 --------
