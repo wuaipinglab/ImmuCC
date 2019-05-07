@@ -25,8 +25,8 @@ Raw fastq format sequencing data should be first preprocessed into the expressio
 (4)	Strand. Get the strand information for the library;
 (5)	Quantification. Quantify Gene expression with HTSeq.
 (6)	Normalization. Subtypes of T cell receptor and B cell receptors were merged into major families and the raw expression matrix were normalized with the quantile normalization method.
-The shell script to preprocess it can be obtained from https://github.com/wuaipinglab/ImmuCC/blob/master/webserver/RNASeq_pipeline.sh.
 
+The shell script to preprocess it can be obtained from https://github.com/wuaipinglab/ImmuCC/blob/master/webserver/RNASeq_pipeline.sh.
 `sh RNASeq_pipeline.sh ${Directory to the base} PE ${Directory to the software} ${Directory to the reference} ${Directory to the scripts} 24`
 
 `${Directory to the base}`: This directory contains 7 files, namely, `01fastq, 02trimmed, 03mapping, 04sorted, 05htseq, raw_fastqc, new_fastqc`. 
