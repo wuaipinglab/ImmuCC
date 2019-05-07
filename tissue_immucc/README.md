@@ -1,4 +1,4 @@
-This repository contains the dependencies to the tissue specific computational tool
+This repository contains a brief introduction on how to run the tissue specific computational tool
 ======================================================================================================
 
 1.Dependencies
@@ -14,7 +14,7 @@ This repository contains the dependencies to the tissue specific computational t
  library(`e1071`)        
  library(`preprocessCore`) 
  
-1.2 Codes
+1.2 Code
 ------------------------------------------------------------------------------------------------------
  1.	Scirpts of `ImmuCC` can be accessed at: https://github.com/wuaipinglab/ImmuCC/blob/master/Microarray_Deconvolution.R
  2.	Scirpts of `CIBERSORT.R` can be accessed from https://cibersort.stanford.edu/ upon an request from `CIBERSORT` team.
