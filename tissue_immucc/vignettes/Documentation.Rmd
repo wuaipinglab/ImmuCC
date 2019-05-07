@@ -12,14 +12,14 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 # Introduction
-The tissue specific computational model predicted the relative proportion of immune cell with a series of tissue specific training signature matrix.
+The tissue specific computational model can be used to predict the relative proportion of immune cell with a series of tissue specific training signature matrix.
 
 It is achieved by three major steps:
-1. Raw data preprocessing
+1. Raw bulk RNA-Seq data preprocessing
 2. Immune cell proportion prediction
 
-# Raw data preprocessing
-Raw fastq format sequencing data should be preprocessed into the expression matrix. Six major steps were included in preprocessing the data. 
+# Raw bulk RNA-Seq data preprocessing
+Raw fastq format sequencing data should be first preprocessed into the expression matrix and six major steps were included. 
 (1)	Quality control;
 (2)	Mapping. Mapping reads into the reference genome with STAR;
 (3)	Sorting. Sort the mapped reads according to their name;
@@ -28,15 +28,14 @@ Raw fastq format sequencing data should be preprocessed into the expression matr
 (6)	Normalization. Subtypes of T cell receptor and B cell receptors were merged into major families and the raw expression matrix were normalized with the quantile normalization method.
 The shell script to preprocess it can be obtained from https://github.com/wuaipinglab/ImmuCC/blob/master/webserver/RNASeq_pipeline.sh.
 
-
 ## Immune cell proportion prediction
-
 The CRAN package “e1071” were used to conduct SVR analysis.The Bioconductor package “preprocessCore” were used to
 
-E.g. To estimate the immune cell proportion from the transcriptome of lung, the lung specific signature matrix was used.
-library(e1071)        
-library(preprocessCore)
+E.g. To estimate the immune cell proportion from the transcriptome of lung, the lung specific signature matrix was used to normaliaze the transcriptome data. As the transcriptome data have been normaliazed when we preprocess the raw sequencing data, it will be not necessary to normalize it again.
+
+use the function `ImmuCC` to get the relative proportion of immune cells
 Immune.proportion <- ImmuCC (expression, training_data = ”Lung.sig.matrix.csv”)
 
-
+You can visualiaze the result with function `pheatmap` in package `pheatmap`.
+pheatmap(Immune.proportion)
 
