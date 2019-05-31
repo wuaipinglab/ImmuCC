@@ -39,8 +39,10 @@ The CRAN package `“e1071”` were used to conduct SVR analysis.The Bioconducto
 
 E.g. To estimate the immune cell proportion from the transcriptome of lung, the lung specific signature matrix was used to normaliaze the transcriptome data. As the transcriptome data have been normaliazed when we preprocess the raw sequencing data, it will be not necessary to normalize it again.
 
-use the function `ImmuCC` to get the relative proportion of immune cells
+use the function `ImmuCC` to get the relative proportion of immune cells from the expression matrix of the biological sample.
 Immune.proportion <- ImmuCC (expression, training_data = ”Lung.sig.matrix.csv”)
+# expression: expression matrix of the biological sample
+# traing_data: tissue specific signature matrix to be used
 
 You can visualiaze the result with function `pheatmap` in package `pheatmap`.
 pheatmap(Immune.proportion)
