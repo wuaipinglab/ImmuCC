@@ -11,8 +11,8 @@ This repository contains a brief introduction on how to run the tissue specific 
       `install.packages(c(“e1071”, “preprocessCore”))`  
 
  After that you can run the following commands to see whether it has been successfully installed.                       
- library(`e1071`)        
- library(`preprocessCore`) 
+ `library(e1071)`       
+ `library(preprocessCor)`
  
 1.2 Code
 ------------------------------------------------------------------------------------------------------
@@ -30,6 +30,7 @@ This repository contains a brief introduction on how to run the tissue specific 
 2.2 Estimate tissue immune cell proportion with tissue specific model
 ------------------------------------------------------------------------------------------------------
  E.g. when estimating the relative proportion between different immune cells from the transcriptome of lung, the lung specific signature matrix was used.
+
 `Immune.proportion <- ImmuCC (expression, training_data = ”Lung.sig.matrix.csv”)`
 
  #expression: transcriptome profile of biological sample;
