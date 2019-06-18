@@ -32,7 +32,7 @@ The shell scripts on how to preprocess it can be obtained from https://github.co
 
 Command for data preprocessing is as below:
 `sh RNASeq_pipeline.sh ${Directory to the base} PE ${Directory to the software} ${Directory to the reference} ${Directory to the scripts} 24`
-
+  Description for the arguments in this command:
   `${Directory to the base}`: This directory contains 7 files, namely, `01fastq, 02trimmed, 03mapping, 04sorted, 05htseq, raw_fastqc, new_fastqc`. 
   `${Directory to the software}`: Softwares used here including: `FastQC, STAR, samtools, RSeQC, htseq-count, R.` were all put in this directory.
   `${Directory to the reference}`: This directory contains all reference data used. In my analysis, the following reference data. including: `Mus_musculus.GRCm38.83.gtf, Mus_musculus.GRCm38.dna.primary_assembly.83.fa, GRCm38_mm10_Ensembl.bed` were used. You can download the lattest version as you want.
