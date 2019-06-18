@@ -14,10 +14,11 @@ knitr::opts_chunk$set(echo = TRUE)
 The tissue specific computational model can be used to predict the relative proportion of immune cell with a series of tissue specific training signature matrix.
 
 It is achieved by three major steps:
-1. Raw bulk RNA-Seq data preprocessing
-2. Immune cell proportion prediction
+  1. Raw bulk RNA-Seq data preprocessing
+  2. Immune cell proportion prediction
 
-# Raw bulk RNA-Seq data preprocessing
+------------------------------------------------------------------------------------------------------------------------
+# 2. Raw bulk RNA-Seq data preprocessing
 Raw fastq format sequencing data should be first preprocessed into the expression matrix and six major steps were included. 
 (1)	Quality control;
 (2)	Mapping. Mapping reads into the reference genome with STAR;
@@ -34,7 +35,8 @@ The shell script to preprocess it can be obtained from https://github.com/wuaipi
 `${Directory to the reference}`: This directory contains all reference data used. In my analysis, the following reference data including: `Mus_musculus.GRCm38.83.gtf, Mus_musculus.GRCm38.dna.primary_assembly.83.fa, GRCm38_mm10_Ensembl.bed` were used. You can download the lattest version as you want.
 `${Directory to the scripts}`: Both shell scripts and R scripts used including: `02qc.sh, 03mapping.sh, 04samtools.sh, 05-1.strand.sh, 05-2.RSEQc.stat.R, 06htseq.sh, MouseHTSeq_counts_stat.R` were all put in this directory.
 
-## Immune cell proportion prediction
+------------------------------------------------------------------------------------------------------------------------
+# 1. Immune cell proportion prediction
 E.g. To estimate the immune cell proportion from the transcriptome of lung, the lung specific signature matrix was used to normaliaze the transcriptome data. As the transcriptome data have been normaliazed when we preprocess the raw sequencing data, it will be not necessary to normalize it again.
 
 Function `ImmuCC` was to get the relative proportion of immune cells from the expression matrix of the biological sample.
