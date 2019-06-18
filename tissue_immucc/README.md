@@ -1,4 +1,4 @@
-This repository contains a brief introduction on how to run the tissue specific computational tool
+This repository contains a brief introduction on how to run the tissue specific deconvolution model
 ======================================================================================================
 
 1.Dependencies
@@ -10,14 +10,14 @@ This repository contains a brief introduction on how to run the tissue specific 
  (3).	At the R prompt: Install the following R packages by issuing command:
       `install.packages(c(“e1071”, “preprocessCore”))`  
 
- After that you can run the following commands to see whether it has been successfully installed.                       
+ You can run the following commands to see whether it has been successfully installed.                       
  `library(e1071)`       
  `library(preprocessCor)`
  
-1.2 Code
+1.2 Scripts and training data
 ------------------------------------------------------------------------------------------------------
- 1.	Scirpts of `ImmuCC` can be accessed at: https://github.com/wuaipinglab/ImmuCC/blob/master/Microarray_Deconvolution.R
- 2.	Scirpts of `CIBERSORT.R` can be accessed from https://cibersort.stanford.edu/ upon an request from `CIBERSORT` team.
+ 1.	Scirpts for `ImmuCC` can be accessed at: https://github.com/wuaipinglab/ImmuCC/blob/master/Microarray_Deconvolution.R
+ 2.	Scirpts for `CIBERSORT.R` can be accessed from https://cibersort.stanford.edu/ upon an request from `CIBERSORT` team.
  3.	Tissue specific signature matrix can be downloaded at: https://github.com/wuaipinglab/ImmuCC/tree/master/tissue_immucc/SignatureMatrix
 
 
@@ -25,18 +25,18 @@ This repository contains a brief introduction on how to run the tissue specific 
 -----------------------------------------------------------------------------------------------------
 2.1 Preprocess the raw RNA-Seq data
 ------------------------------------
- Methods to preprocess the bulk RNA-Seq data were the same as what we used in `seq_ImmuCC`. The shell scripts on how to  transform the fastq format sequencing data into the expression matrix were available at https://github.com/wuaipinglab/ImmuCC/tree/master/webserver
+ Methods used to preprocess the bulk RNA-Seq data were the same as what we used in `seq_ImmuCC`. The shell scripts on how to transform the fastq format sequencing data into the expression matrix were available at https://github.com/wuaipinglab/ImmuCC/tree/master/webserver
 
 2.2 Estimate tissue immune cell proportion with tissue specific model
 ------------------------------------------------------------------------------------------------------
- E.g. when estimating the relative proportion between different immune cells from the transcriptome of lung, the lung specific signature matrix was used.
+ E.g. when estimating the immune cell constitution from the transcriptome of lung, the lung specific signature matrix `”Lung.sig.matrix.csv”` was used in parameter `training_data`.
 
 `Immune.proportion <- ImmuCC (expression, training_data = ”Lung.sig.matrix.csv”)`
 
- #expression: transcriptome profile of biological sample;
- traing_data： training signature matrix;
+ #expression: matrix of sample expression profile;
+ traing_data：training signature matrix;
 
 
 3.Output result
 --------------------------------------------------------------------------------------------------------
- The calculated result will be save into a csv or txt format file. Each row of result table represents each biological sample and the column name correspondents to each immune cell. 
+ The calculated result will be save into a csv or txt format file. the row represents samples and the column was correspondents to the predicted immune cells. 
