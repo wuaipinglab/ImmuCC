@@ -36,6 +36,6 @@ This repository contains a brief introduction on how to run the tissue specific 
  traing_data： training signature matrix;
 
 
-3.Output of the calculated result
+3.Output result
 --------------------------------------------------------------------------------------------------------
  The calculated result will be save into a csv or txt format file. Each row of result table represents each biological sample and the column name correspondents to each immune cell. 
