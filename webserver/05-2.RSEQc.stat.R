@@ -34,13 +34,13 @@
     
       # Strandness parameter for HTSeq
       strandness1 <- rep("no", length(strand1))
-      strandness1[strand2>0.7] <- "reverse"
-      strandness1[strand1>0.7] <- "yes"
+      strandness1[strand2 > 0.7] <- "reverse"
+      strandness1[strand1 > 0.7] <- "yes"
     
       # Strandness parameter for RSEM
       strandness2 <- rep("none", length(strand1))
-      strandness2[strand2>0.7] <- "reverse"
-      strandness2[strand1>0.7] <- "forward"
+      strandness2[strand2 > 0.7] <- "reverse"
+      strandness2[strand1 > 0.7] <- "forward"
 
       result <- data.frame(samplename=samplename,
                            strand1=strand1,
