@@ -1,4 +1,6 @@
 
+  # For more information, please read "http://rseqc.sourceforge.net/#infer-experiment-py"
+
   argv <- commandArgs(TRUE)
   options(stringsAsFactors=F)
 
