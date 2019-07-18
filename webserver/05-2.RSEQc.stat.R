@@ -12,8 +12,6 @@
       cat("There are unknown type files, please check the StrandInfo file!", "\n")
       break
   } else {
-      #n <- nrow(data)
-      #samplename <- data[seq(1, n, 5), 1] 
       index1 <- grep('This is', data[, 1])
       index2 <- grep('Fraction', data[, 1])
       samplename <- data[-c(index1, index2), 1]
