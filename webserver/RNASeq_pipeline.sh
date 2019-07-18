@@ -1,8 +1,12 @@
 
 #!/bin/bash
-
+############################################################
 # The scripts in "RNASeq_pipeline.sh" are used to preprocess the RNA-Seq data(from "fastq" to "reads"). The scripts including four major steps: 
 # quality control; mapping; bam file sorting; quantification and normalization.
+# The raw fastq format data should be put into the directory of ${base_dir}/01fastq
+
+# If you cannnot access our webserver from the link: http://wap-lab.org:3200/immune/, you can open from: http://218.4.234.74:3200/immune/
+# If the results page URL emailed to you can not open, please do not shut down the work page and download the result directly from this site.
 
 ###############################################################################
 # For more detail about RNA-Seq data analysis, please read our paper:
@@ -11,43 +15,37 @@
 # From Mouse RNA-Seq Data. Front. Immunol. 9:1286. doi: 10.3389/fimmu.2018.01286.
 
 ###############################################################################
-# If you cannnot access our webserver from the link: http://wap-lab.org:3200/immune/, you can open from: http://218.4.234.74:3200/immune/
-
-# If the results page URL emailed to you can not open, please do not shut down the work page and download the result directly from this site.
-
-###############################################################################
 #                          input parameters
 ###############################################################################
 
-############################################################
 # Base directory
 # This directory contains the folowing files:
 #     "01fastq", "02trimmed", "03mapping", "04sorted", "05htseq", "raw_fastqc", "old_fastqc"
 # However, it will be create if the file was not existed.
-base_dir=$1                              # Example: /gluster/home/chenziyi/MouseData
+base_dir=$1                              # e.g., "/gluster/home/chenziyi/MouseData"
 
 ############################################################
 # library_layout (PE | SE)
 # "PE" for paired end sequencing and "SE" for single end sequencing
-library_layout=$2                        # Example: PE
+library_layout=$2                        # e.g., "PE"
 
 ############################################################
 # Directory to the software
-software_path=$3                         # Examble: /gluster/home/chenziyi/software
+software_path=$3                         # e.g., "/gluster/home/chenziyi/software"
 
 ############################################################
 # Directory to the reference
-ref_path=4                               # Example: /gluster/home/chenziyi/ref
+ref_path=4                               # e.g., "/gluster/home/chenziyi/ref"
 
 ############################################################
 # Directory to the scripts
 # This directory contains the folowing files:
 #    "01gunzip.sh", "02qc.sh", "03mapping.sh", "04samtools.sh", "05-1.strand.sh", "05-2.RSEQc.stat.R", "06htseq.sh", "MouseHTSeq_counts_stat.R", "receptor.ensemble.merge.RData"
-script_path=$5                           # Example: /gluster/home/chenziyi/script/RNA-Seq/star
+script_path=$5                           # e.g., "/gluster/home/chenziyi/script/RNA-Seq/star"
 
 ############################################################
 # number of threads to be used
-thread=$6                                # Example: 24
+thread=$6                                # e.g., "24"
 
 ############################################################
 gtf=${ref_path}/Mus_musculus.GRCm38.83.gtf
@@ -113,14 +111,6 @@ $star --runThreadN ${thread} \
       --sjdbOverhang 100
 fi
 
-## gunzip the *.gz files
-# echo "Gunzip..."
-# sh 01gunzip.sh ${input_path}/01fastq ${result_path}/01fastq
-
-## transform the sra format data into fastq format data
-# echo "Transform SRA to fastq\n"
-# sh ${script_dir}/00sra_fastq.sh ${input_path}/00sra ${result_path}/01fastq
-
 ## quality control
 echo "quality control\n"
 sh ${script_dir}/02qc.sh ${library_layout} ${base_dir}/01fastq ${base_dir}/02trimmed ${fastqc} ${trimmomatic} ${trimmomatic_adapter} ${base_dir}/raw_fastqc ${base_dir}/new_fastqc ${thread}
@@ -141,10 +131,6 @@ Rscript ${script_dir}/05-2.RSEQc.stat.R ${base_dir}/StrandInfo ${base_dir}/stran
 ## quantification with HTSeq
 echo "HTSeq" 
 sh ${script_dir}/06htseq.sh ${base_dir}/04sorted ${base_dir}/05htseq ${base_dir}/strand.txt ${htseq} ${gtf} 
-
-# quantification with RSEM
-#echo "RSEM"
-#sh ${script_dir}/07rsem.sh ${base_dir}/03mapping ${base_dir}/06rsem ${base_dir}/strand.txt ${rsem} ${rsem_ref} ${thread}
 
 ## immune receptor gene merging and normalization
 echo "normalization"
