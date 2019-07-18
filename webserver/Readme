@@ -17,8 +17,14 @@ Notes:
 
 8, If the result page URL emailed to you can not open, please do not close the work page and download the result from it untill the job is finished.
 
-
-
+9, Software used in our paper were as follow,
+  FastQC v0.11.4
+  Trimmomatic-0.35
+  STAR-2.5.2a  
+  RSeQC-2.6.3
+  HTseq 0.6.1p1
+  
+  
 To view the online publication, please click here:
 http://journal.frontiersin.org/article/10.3389/fimmu.2018.01286/full?&utm_source=Email_to_authors_&utm_medium=Email&utm_content=T1_11.5e1_author&utm_campaign=Email_publication&field=&journalName=Frontiers_in_Immunology&id=381701
 
