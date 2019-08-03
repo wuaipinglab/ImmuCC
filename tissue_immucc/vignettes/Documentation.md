@@ -18,7 +18,7 @@ It is achieved by three major steps:
   2. Immune cell proportion prediction
 
 ------------------------------------------------------------------------------------------------------------------------
-# 2. Raw bulk RNA-Seq data preprocessing
+1. Raw bulk RNA-Seq data preprocessing
 Raw fastq format sequencing data should be first preprocessed into the expression matrix.
 Here, six major steps are included to preprocess the raw data. 
 (1)	Quality control;
@@ -39,7 +39,7 @@ Commands for data preprocessing are listed below:
   `${Directory to the scripts}`: All scripts used here including: `02qc.sh, 03mapping.sh, 04samtools.sh, 05-1.strand.sh, 05-2.RSEQc.stat.R, 06htseq.sh, MouseHTSeq_counts_stat.R` are put in this directory.
 
 ------------------------------------------------------------------------------------------------------------------------
-# 1. Immune cell proportion prediction
+2. Immune cell proportion prediction
 E.g. To estimate immune cell proportion from the transcriptome data of lung, the lung specific signature matrix is used as the training data. As the sample transcriptome data have been normaliazed during data preprocessing steps, it will be not necessary to normalize it again.
 
 Function `ImmuCC` was used to calculated immune cell proportions from the expression matrix of sample.
