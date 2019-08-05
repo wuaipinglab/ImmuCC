@@ -11,7 +11,7 @@ Estimate the relative proportion of tissue immune cell from tissue transcriptome
 # Introduction
 The tissue specific computational model can be used to predict the relative proportion of immune cell with a series of tissue specific training signature matrix.
 
-It is achieved by three major steps:
+It is achieved by two major steps:
   1. Raw bulk RNA-Seq data preprocessing
   2. Immune cell proportion prediction
 
@@ -28,9 +28,9 @@ Here, six major steps are included to preprocess the raw data.
 
 The shell scripts on how to preprocess it can be obtained from https://github.com/wuaipinglab/ImmuCC/blob/master/webserver/RNASeq_pipeline.sh.
 
-Commands for data preprocessing are listed below:
-`sh RNASeq_pipeline.sh ${Directory to the base} PE ${Directory to the software} ${Directory to the reference} ${Directory to the scripts} 24`
-  Description for the arguments in this command:
+* Commands for data preprocessing are listed below:
+>`sh RNASeq_pipeline.sh ${Directory to the base} PE ${Directory to the software} ${Directory to the reference} ${Directory to the scripts} 24`
+* Description for the arguments in this command:
   `${Directory to the base}`: This directory contains 7 files, namely, `01fastq, 02trimmed, 03mapping, 04sorted, 05htseq, raw_fastqc, new_fastqc`. 
   `${Directory to the software}`: Softwares used here including: `FastQC, STAR, samtools, RSeQC, htseq-count, R.` were all put in this directory.
   `${Directory to the reference}`: This directory contains all reference data used. In my analysis, the following reference data. including: `Mus_musculus.GRCm38.83.gtf, Mus_musculus.GRCm38.dna.primary_assembly.83.fa, GRCm38_mm10_Ensembl.bed` are used. You can download the lattest version as you want.
@@ -42,8 +42,9 @@ E.g. To estimate immune cell proportion from the transcriptome data of lung, the
 
 Function `ImmuCC` was used to calculated immune cell proportions from the expression matrix of sample.
 Two basic arguments including `expression` and `traing_data` were needed for this function 
-> expression: expression matrix of the biological sample
+> expression: expression matrix of the biological sample; 
+
 > traing_data: tissue specific signature matrix to be used
 
 An examble on how to run this function was listed below
-   Immune.proportion <- ImmuCC (expression, training_data = ”Lung.sig.matrix.csv”)
+> Immune.proportion <- ImmuCC (expression, training_data = ”Lung.sig.matrix.csv”)
