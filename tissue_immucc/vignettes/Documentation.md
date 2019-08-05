@@ -23,7 +23,7 @@ Here, six major steps are included to preprocess the raw data.
 (2)	Mapping. Mapping sequencing reads to the reference genome with STAR;
 (3)	Sorting. Sort the mapped reads according to their name;
 (4)	Strand. Get the strand information of the library;
-(5)	Quantification. Quantify Gene expression with HTSeq.
+(5)	Quantification. Quantify gene expression with HTSeq.
 (6)	Normalization. Subtypes of T cell receptor and B cell receptor genes are merged into major families and the raw expression matrix are normalized with the quantile normalization method.
 
 Shell scripts on how to preprocess the raw RNA-Seq data can be obtained from https://github.com/wuaipinglab/ImmuCC/blob/master/webserver/RNASeq_pipeline.sh.
@@ -34,17 +34,17 @@ Shell scripts on how to preprocess the raw RNA-Seq data can be obtained from htt
 * Description for the arguments in this command:
   `${Directory to the base}`: This directory contains 7 files, namely, `01fastq, 02trimmed, 03mapping, 04sorted, 05htseq, raw_fastqc, new_fastqc`. 
   
-  `${Directory to the software}`: Softwares used here including: `FastQC, STAR, samtools, RSeQC, htseq-count, R.` were all put in this directory.
+  `${Directory to the software}`: This directory contains all softwares used in this analysis including: `FastQC, STAR, samtools, RSeQC, htseq-count, R.`
   
-  `${Directory to the reference}`: This directory contains all reference data used. In my analysis, the following reference data. including: `Mus_musculus.GRCm38.83.gtf, Mus_musculus.GRCm38.dna.primary_assembly.83.fa, GRCm38_mm10_Ensembl.bed` are used. You can download the lattest version as you want.
+  `${Directory to the reference}`: This directory contains the reference data required for mapping and quantification. In my analysis, the following reference data including: `Mus_musculus.GRCm38.83.gtf, Mus_musculus.GRCm38.dna.primary_assembly.83.fa, GRCm38_mm10_Ensembl.bed` are put in this directory. You can also download the lattest reference data.
   
   `${Directory to the scripts}`: All scripts used here including: `02qc.sh, 03mapping.sh, 04samtools.sh, 05-1.strand.sh, 05-2.RSEQc.stat.R, 06htseq.sh, MouseHTSeq_counts_stat.R` are put in this directory.
 
 ------------------------------------------------------------------------------------------------------------------------
 ## 2. Immune cell proportion prediction
-E.g. To estimate immune cell proportion from the transcriptome data of lung, the lung specific signature matrix is in the parameter `training_data`. As the transcriptome data of tissue have been normaliazed during data preprocessing steps, it will be not necessary to normalize it again.
+E.g. To estimate immune cell proportion from the transcriptome data of lung, the lung specific signature matrix is in the parameter `training_data`. As the transcriptome data of tissue has been normaliazed during data preprocessing steps, it will be not necessary to normalize it again.
 
-Function `ImmuCC` was used to calculated immune cell proportions from the expression matrix of samples.
+Function `ImmuCC` is used to calculated immune cell proportions from the expression matrix of samples.
 Two basic arguments including `expression` and `traing_data` are needed for this function 
 > expression: expression matrix of the biological sample; 
 
