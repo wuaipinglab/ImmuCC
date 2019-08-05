@@ -7,9 +7,7 @@ abstract:
 Estimate the relative proportion of tissue immune cell from tissue transcriptome with a tissue specific model.
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
+
 # Introduction
 The tissue specific computational model can be used to predict the relative proportion of immune cell with a series of tissue specific training signature matrix.
 
@@ -18,7 +16,7 @@ It is achieved by three major steps:
   2. Immune cell proportion prediction
 
 ------------------------------------------------------------------------------------------------------------------------
-1. Raw bulk RNA-Seq data preprocessing
+## 1. Raw bulk RNA-Seq data preprocessing
 Raw fastq format sequencing data should be first preprocessed into the expression matrix.
 Here, six major steps are included to preprocess the raw data. 
 (1)	Quality control;
@@ -39,13 +37,13 @@ Commands for data preprocessing are listed below:
   `${Directory to the scripts}`: All scripts used here including: `02qc.sh, 03mapping.sh, 04samtools.sh, 05-1.strand.sh, 05-2.RSEQc.stat.R, 06htseq.sh, MouseHTSeq_counts_stat.R` are put in this directory.
 
 ------------------------------------------------------------------------------------------------------------------------
-2. Immune cell proportion prediction
+## 2. Immune cell proportion prediction
 E.g. To estimate immune cell proportion from the transcriptome data of lung, the lung specific signature matrix is used as the training data. As the sample transcriptome data have been normaliazed during data preprocessing steps, it will be not necessary to normalize it again.
 
 Function `ImmuCC` was used to calculated immune cell proportions from the expression matrix of sample.
 Two basic arguments including `expression` and `traing_data` were needed for this function 
-# expression: expression matrix of the biological sample
-# traing_data: tissue specific signature matrix to be used
+> expression: expression matrix of the biological sample
+> traing_data: tissue specific signature matrix to be used
 
 An examble on how to run this function was listed below
    Immune.proportion <- ImmuCC (expression, training_data = ”Lung.sig.matrix.csv”)
