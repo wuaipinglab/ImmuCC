@@ -12,33 +12,34 @@ Estimate the relative proportion of tissue immune cell from tissue transcriptome
 The tissue specific computational model can be used to predict the relative proportion of immune cell with a series of tissue specific training signature matrix.
 
 It is achieved by two major steps:
-*  1. Raw bulk RNA-Seq data preprocessing
-*  2. Immune cell proportion prediction
+  *  1. Raw bulk RNA-Seq data preprocessing
+  *  2. Immune cell proportion prediction
 
 ------------------------------------------------------------------------------------------------------------------------
 ## 1. Raw bulk RNA-Seq data preprocessing
 Raw fastq format sequencing data should be first preprocessed into the expression matrix.
 Here, six major steps are included to preprocess the raw data. 
-(1)	Quality control. Removing low quality sequence and adaptor trimming et.al.
-(2)	Mapping. Mapping sequencing reads to the reference genome with STAR;
-(3)	Sorting. Sort the mapped reads according to their name;
-(4)	Strand. Get the strand information of the library;
-(5)	Quantification. Quantify gene expression with HTSeq.
-(6)	Normalization. Subtypes of T cell receptor and B cell receptor genes are merged into major families and the raw expression matrix are normalized with the quantile normalization method.
+  (1)	Quality control. Removing low quality sequence and adaptor trimming et.al.
+  (2)	Mapping. Mapping sequencing reads to the reference genome with STAR;
+  (3)	Sorting. Sort the mapped reads according to their name;
+  (4)	Strand. Get the strand information of the library;
+  (5)	Quantification. Quantify gene expression with HTSeq.
+  (6)	Normalization. Subtypes of T cell receptor and B cell receptor genes are merged into major families and the raw expression matrix are normalized with the quantile normalization method.
 
 Shell scripts on how to preprocess the raw RNA-Seq data can be obtained from https://github.com/wuaipinglab/ImmuCC/blob/master/webserver/RNASeq_pipeline.sh.
 
 * Command for data preprocessing is listed below:
->`sh RNASeq_pipeline.sh ${Directory to the base} PE ${Directory to the software} ${Directory to the reference} ${Directory to the scripts} 24`
+  >`sh RNASeq_pipeline.sh ${Directory to the base} PE ${Directory to the software} ${Directory to the reference} ${Directory to the scripts} 24`
 
 * Description for the arguments in this command:
-  `${Directory to the base}`: This directory contains 7 files, namely, `01fastq, 02trimmed, 03mapping, 04sorted, 05htseq, raw_fastqc, new_fastqc`. 
+
+    `${Directory to the base}`: This directory contains 7 files, namely, `01fastq, 02trimmed, 03mapping, 04sorted, 05htseq, raw_fastqc, new_fastqc`. 
   
-  `${Directory to the software}`: This directory contains all softwares used in this analysis including: `FastQC, STAR, samtools, RSeQC, htseq-count, R.`
+    `${Directory to the software}`: This directory contains all softwares used in this analysis including: `FastQC, STAR, samtools, RSeQC, htseq-count, R.`
   
-  `${Directory to the reference}`: This directory contains the reference data required for mapping and quantification. In my analysis, the following reference data including: `Mus_musculus.GRCm38.83.gtf, Mus_musculus.GRCm38.dna.primary_assembly.83.fa, GRCm38_mm10_Ensembl.bed` are put in this directory. You can also download the lattest reference data.
+    `${Directory to the reference}`: This directory contains the reference data required for mapping and quantification. In my analysis, the following reference data including: `Mus_musculus.GRCm38.83.gtf, Mus_musculus.GRCm38.dna.primary_assembly.83.fa, GRCm38_mm10_Ensembl.bed` are put in this directory. You can also download the lattest reference data.
   
-  `${Directory to the scripts}`: All scripts used here including: `02qc.sh, 03mapping.sh, 04samtools.sh, 05-1.strand.sh, 05-2.RSEQc.stat.R, 06htseq.sh, MouseHTSeq_counts_stat.R` are put in this directory.
+    `${Directory to the scripts}`: All scripts used here including: `02qc.sh, 03mapping.sh, 04samtools.sh, 05-1.strand.sh, 05-2.RSEQc.stat.R, 06htseq.sh, MouseHTSeq_counts_stat.R` are put in this directory.
 
 ------------------------------------------------------------------------------------------------------------------------
 ## 2. Immune cell proportion prediction
