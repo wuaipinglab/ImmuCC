@@ -7,15 +7,9 @@ This repository contains a brief introduction on how to run the tissue specific 
 ---------
 * `R` -- Install R from https://cran.r-project.org/.
  
-* Once installed, open a terminal and at the command prompt, type R.
- 
 * At the R prompt: Install the following R packages by issuing command:
       `install.packages(c(“e1071”, “preprocessCore”))`  
 
-You can run the following commands to see whether it has been successfully installed.                       
-   .`library(e1071)`       
-   .`library(preprocessCor)`
- 
  1.2 Scripts and training data
 ------------------------------------------------------------------------------------------------------
 * Scirpts for `ImmuCC` can be accessed at: https://github.com/wuaipinglab/ImmuCC/blob/master/Microarray_Deconvolution.R
@@ -27,11 +21,11 @@ You can run the following commands to see whether it has been successfully insta
 -----------------------------------------------------------------------------------------------------
  2.1 Preprocess the raw RNA-Seq data
   ------------------------------------
-  Methods used to preprocess the bulk RNA-Seq data are the same as what we used in `seq_ImmuCC`. The shell scripts on how to transform fastq format sequencing data into the expression matrix are available at https://github.com/wuaipinglab/ImmuCC/tree/master/webserver
+  Methods used to preprocess the bulk RNA-Seq data are the same as what we used in `seq_ImmuCC`. The shell scripts on how to get the expression matrix from fastq format raw sequencing data are available at https://github.com/wuaipinglab/ImmuCC/tree/master/webserver
 
  2.2 Estimate tissue immune cell proportion with tissue specific model
  ------------------------------------------------------------------------------------------------------
-  E.g. when estimating the immune cell constitution from the transcriptome of lung, the lung specific signature matrix   `”Lung.sig.matrix.csv”` is used in parameter `training_data`.
+  E.g. when estimating the immune cell constitution from the transcriptome data of lung, the lung specific signature matrix   `”Lung.sig.matrix.csv”` is used in parameter `training_data`.
 
   .`Immune.proportion <- ImmuCC (expression, training_data = ”Lung.sig.matrix.csv”)`
 
@@ -41,4 +35,4 @@ You can run the following commands to see whether it has been successfully insta
 
 3.Output result
 --------------------------------------------------------------------------------------------------------
-   The calculated result will be save into a csv or txt format file. the row represents samples and the column was correspondents to the predicted immune cells. 
+   The calculated result will be save into a csv or txt format file. the row represents samples and the column is the predicted immune cells. 
