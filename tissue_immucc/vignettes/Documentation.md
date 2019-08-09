@@ -48,9 +48,9 @@ E.g. To estimate immune cell proportion from the transcriptome data of lung, the
 
 Function `ImmuCC` is used to calculated immune cell proportions from the expression matrix of samples.
 Two basic arguments including `expression` and `traing_data` are needed for this function.
-* expression: expression matrix of the biological sample;
+* `expression`: expression matrix of the biological sample;
 
-* traing_data: tissue specific signature matrix to be used.
+* `traing_data`: tissue specific signature matrix to be used.
 
 An examble on how to run this function was listed below:
 > Immune.proportion <- ImmuCC (expression, ”Lung.sig.matrix.csv”)
