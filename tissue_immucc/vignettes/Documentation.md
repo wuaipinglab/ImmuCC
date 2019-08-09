@@ -1,15 +1,15 @@
 ---
-title: "A basic workflow for tissue specific deconvolution model"
+title: "A basic workflow for tissue specific deconvolution approach"
 author: "Ziyi Chen"
 output: html_document
 
 abstract:
-Estimate the relative proportion of tissue immune cell from tissue transcriptome with a tissue specific model.
+Estimate the relative proportion of tissue immune cell from tissue transcriptome with a tissue specific approach.
 ---
 
 
 # Introduction
-The tissue specific computational model can be used to predict the relative immune cell proportion with a series of tissue specific training signature matrix.
+The tissue specific computational approach developed here can be used to predict the relative immune cell proportion with several tissue specific training signature matrix.
 
 It is achieved by two major steps:
   *  1. Raw bulk RNA-Seq data preprocessing
@@ -19,12 +19,12 @@ It is achieved by two major steps:
 ## 1. Raw bulk RNA-Seq data preprocessing
 Raw fastq format sequencing data should be first preprocessed into the expression matrix.
 Here, six major steps are included in this process. 
-  (1)	Quality control. Removing low quality sequence and adaptor trimming et.al.
-  (2)	Mapping. Mapping sequencing reads to the reference genome with STAR;
+  (1)	Quality control. Remove low quality sequencing data and adaptor trimming et.al.
+  (2)	Mapping. Map sequencing reads to the reference genome with STAR;
   (3)	Sorting. Sort the mapped reads according to their name;
   (4)	Strand. Get the strand information of the library;
   (5)	Quantification. Quantify gene expression with HTSeq;
-  (6)	Normalization. Subtypes of T cell receptor and B cell receptor genes are merged into major families and the raw expression matrix are normalized with the quantile normalization method.
+  (6)	Normalization. Normalize the raw expression data with the quantile normalization method.
 
 Shell scripts on how to preprocess the raw RNA-Seq data can be obtained from https://github.com/wuaipinglab/ImmuCC/blob/master/webserver/RNASeq_pipeline.sh.
 
