@@ -18,9 +18,9 @@ This repository contains a brief introduction on how to run the tissue specific 
  
 >1.2 Scripts and training data
 ------------------------------------------------------------------------------------------------------
->>1.	Scirpts for `ImmuCC` can be accessed at: https://github.com/wuaipinglab/ImmuCC/blob/master/Microarray_Deconvolution.R
->>2.	Scirpts for `CIBERSORT.R` can be accessed from https://cibersort.stanford.edu/ upon an request from `CIBERSORT` team.
->>3.	Tissue specific signature matrix can be downloaded at: https://github.com/wuaipinglab/ImmuCC/tree/master/tissue_immucc/SignatureMatrix
+* Scirpts for `ImmuCC` can be accessed at: https://github.com/wuaipinglab/ImmuCC/blob/master/Microarray_Deconvolution.R
+* Scirpts for `CIBERSORT.R` can be accessed from https://cibersort.stanford.edu/ upon an request from `CIBERSORT` team.
+* Tissue specific signature matrix can be downloaded at: https://github.com/wuaipinglab/ImmuCC/tree/master/tissue_immucc/SignatureMatrix
 
 
 2 How to estimate tissue immune cell proportion
