@@ -33,15 +33,14 @@ Shell scripts on how to preprocess the raw RNA-Seq data can be obtained from htt
 
 * Description for the arguments in this command:
 
-    `${Directory to the base}`: This directory contains 7 files, namely, `01fastq, 02trimmed, 03mapping, 04sorted, 05htseq, raw_fastqc, new_fastqc`. 
+*  `${Directory to the base}`: This directory contains 7 files, namely, `01fastq, 02trimmed, 03mapping, 04sorted, 05htseq, raw_fastqc, new_fastqc`. 
   
-    `${Directory to the software}`: This directory contains all softwares used in this analysis including: `FastQC, STAR, samtools, RSeQC, htseq-count, R.`
+*  `${Directory to the software}`: This directory contains all softwares used in this analysis including: `FastQC, STAR, samtools, RSeQC, htseq-count, R.`
   
-    `${Directory to the reference}`: This directory contains the reference data required for mapping and quantification. In my analysis, the following reference data including: `Mus_musculus.GRCm38.83.gtf, Mus_musculus.GRCm38.dna.primary_assembly.83.fa, GRCm38_mm10_Ensembl.bed` are used. You can also download the lattest reference data.
+*  `${Directory to the reference}`: This directory contains the reference data required for mapping and quantification. In my analysis, the following reference data including: `Mus_musculus.GRCm38.83.gtf, Mus_musculus.GRCm38.dna.primary_assembly.83.fa, GRCm38_mm10_Ensembl.bed` are used. You can also download the lattest reference data.
   
-    `${Directory to the scripts}`: All basic scripts used above including: `02qc.sh, 03mapping.sh, 04samtools.sh, 05-1.strand.sh, 05-2.RSEQc.stat.R, 06htseq.sh, MouseHTSeq_counts_stat.R` are put in this directory.
-
-    `${thread_number}`: Number of thread to be used.
+*  `${Directory to the scripts}`: All basic scripts used above including: `02qc.sh, 03mapping.sh, 04samtools.sh, 05-1.strand.sh, 05-2.RSEQc.stat.R, 06htseq.sh, MouseHTSeq_counts_stat.R` are put in this directory.
+*  `${thread_number}`: Number of thread to be used.
 ------------------------------------------------------------------------------------------------------------------------
 ## 2. Immune cell proportion prediction
 E.g. To estimate immune cell proportion from the transcriptome data of lung, the lung specific signature matrix is used in parameter `training_data`. As the transcriptome data has been normaliazed during data preprocessing steps, it will be not necessary to normalize it again.
