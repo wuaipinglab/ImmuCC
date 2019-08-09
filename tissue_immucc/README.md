@@ -5,11 +5,11 @@ This repository contains a brief introduction on how to run the tissue specific 
 ------------------------------------------------------------------------------------------------------
 >1.1 Software
 ---------
->>>(1).	`R` -- Install R from https://cran.r-project.org/.
+>>(1).	`R` -- Install R from https://cran.r-project.org/.
  
->>>(2).	Once installed, open a terminal and at the command prompt, type R.
+>>(2).	Once installed, open a terminal and at the command prompt, type R.
  
->>>(3).	At the R prompt: Install the following R packages by issuing command:
+>>(3).	At the R prompt: Install the following R packages by issuing command:
       `install.packages(c(“e1071”, “preprocessCore”))`  
 
 >You can run the following commands to see whether it has been successfully installed.                       
@@ -18,9 +18,9 @@ This repository contains a brief introduction on how to run the tissue specific 
  
 >1.2 Scripts and training data
 ------------------------------------------------------------------------------------------------------
->>>1.	Scirpts for `ImmuCC` can be accessed at: https://github.com/wuaipinglab/ImmuCC/blob/master/Microarray_Deconvolution.R
->>>2.	Scirpts for `CIBERSORT.R` can be accessed from https://cibersort.stanford.edu/ upon an request from `CIBERSORT` team.
->>>3.	Tissue specific signature matrix can be downloaded at: https://github.com/wuaipinglab/ImmuCC/tree/master/tissue_immucc/SignatureMatrix
+>>1.	Scirpts for `ImmuCC` can be accessed at: https://github.com/wuaipinglab/ImmuCC/blob/master/Microarray_Deconvolution.R
+>>2.	Scirpts for `CIBERSORT.R` can be accessed from https://cibersort.stanford.edu/ upon an request from `CIBERSORT` team.
+>>3.	Tissue specific signature matrix can be downloaded at: https://github.com/wuaipinglab/ImmuCC/tree/master/tissue_immucc/SignatureMatrix
 
 
 2 How to estimate tissue immune cell proportion
