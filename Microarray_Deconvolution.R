@@ -35,14 +35,15 @@ CEL_ematrix <- function(path){
  # Note: the library version listed here is the package versions used in my work. However, you can choose the correspondent version based on the R installed in your computer and it will have no impact on the result.
   
 # Read all cel files under path with a custom cdf "mouse4302mmentrezcdf"
-  affydata <- ReadAffy(celfile.path=path, cdf="mouse4302mmentrezcdf")
+  affydata <- ReadAffy(celfile.path=path, cdfname="mouse4302mmentrezcdf")
 
 # Preprocessing with frma
   eset <- frma(affydata)
 
 # Output the expression value of samples profiled on array
   ematrix <- exprs(eset)
-  write.table(ematrix, "mixture.txt",row.names=F, col.names=F)
+  #rownames(ematrix) <- gsub("\\_.*", "", rownames(ematrix))
+  write.table(ematrix, "mixture.txt", row.names=F, col.names=F)
   ematrix
 }
 
