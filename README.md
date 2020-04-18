@@ -1,4 +1,8 @@
-Notes for your sample data:
+
+Users can send their probelem to my working email chziy429@163.com
+
+
+Notes for the RNA-Seq data:
 
 1, NA should not appeared in the first column of Gene names.
 
