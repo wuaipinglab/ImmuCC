@@ -18,19 +18,19 @@
 #                          input parameters
 ###############################################################################
 
-# Base directory
+# $base_dir
 # This directory contains the folowing files:
 #     "01fastq", "02trimmed", "03mapping", "04sorted", "05htseq", "raw_fastqc", "old_fastqc"
 # However, it will be create if the file was not existed.
 base_dir=$1                              # e.g., "/gluster/home/chenziyi/MouseData"
 
 ############################################################
-# library_layout (PE | SE)
+# $library_layout (PE | SE)
 # "PE" for paired end sequencing and "SE" for single end sequencing
 library_layout=$2                        # e.g., "PE"
 
 ############################################################
-# Directory to the software
+# $software_path: Directory to the software
 software_path=$3                         # e.g., "/gluster/home/chenziyi/software"
 
 ############################################################
@@ -38,13 +38,13 @@ software_path=$3                         # e.g., "/gluster/home/chenziyi/softwar
 ref_path=4                               # e.g., "/gluster/home/chenziyi/ref"
 
 ############################################################
-# Directory to the scripts
+# $script_path: Directory to the scripts
 # This directory contains the folowing files:
 #    "01gunzip.sh", "02qc.sh", "03mapping.sh", "04samtools.sh", "05-1.strand.sh", "05-2.RSEQc.stat.R", "06htseq.sh", "MouseHTSeq_counts_stat.R", "receptor.ensemble.merge.RData"
 script_path=$5                           # e.g., "/gluster/home/chenziyi/script/RNA-Seq/star"
 
 ############################################################
-# number of threads to be used
+# $thread: number of threads to be used
 thread=$6                                # e.g., "24"
 
 ############################################################
