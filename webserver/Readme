@@ -5,8 +5,7 @@ Notes:
 
 2, You can download the lattest gtf and fastq file to build the reference data because there is duplicate gene symbols in previous versions.
    
-3, You should better evaluate the data quality by checking the result in the directory of "old_fastqc" and "new_fastqc". As our scripts will run all preprocessing steps at one time, the expression profile of those low quality data (For examble: high duplicating rates, low sequencing length et.al) should be removed as usual RNA-Seq analysis.
-
+3, You should better evaluate the data quality by checking the result in the directory of "old_fastqc" and "new_fastqc". The low quality data (For examble: high duplicating rates, low sequencing length et.al) will be removed from the raw data as usual RNA-Seq analysis.
 4, You should make sure the common genes bewteen the signature matrix and tissue expression profile is enough. You'd better process the raw sequencing data according to our pipeline here.
 
 5, The transcriptomal matrices should be separated by ",", "/t" or " " and the duplicated gene names should be removed before submit your job to our server.
