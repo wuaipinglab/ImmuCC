@@ -27,6 +27,15 @@ Notes:
 10, Signature matrix developed for RNA-Seq data was included in this directory, named "SignatureMatrix.rnaseq.csv".
 
 
+11, NA should not appeared in the first column of Gene names and Duplicated gene names should be removed before submitting your data.
+
+12, Number of signature genes in your sample should not be too small, because we should make sure that signature genes specific for each cell type is enough.
+
+13, Sometimes the server will start to run and then stop at a few seconds when there are too many works in our computer cluster. You can try it again in some other times.
+
+14, If the number of samples included in the submitted expression matrix was too large, the task will stop in a few seconds. Please split your data into some smaller files.
+
+
 To view the online publication, please click here:
 http://journal.frontiersin.org/article/10.3389/fimmu.2018.01286/full?&utm_source=Email_to_authors_&utm_medium=Email&utm_content=T1_11.5e1_author&utm_campaign=Email_publication&field=&journalName=Frontiers_in_Immunology&id=381701
 
