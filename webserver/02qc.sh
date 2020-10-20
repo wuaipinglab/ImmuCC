@@ -31,7 +31,7 @@ new_fastqc=$8
 # number of threads
 thread=$9
 
-software_para="2:30:10 LEADING:20 TRAILING:20 SLIDINGWINDOW:4:20 MINLEN:10"
+software_para="2:30:10 LEADING:20 TRAILING:20 SLIDINGWINDOW:4:20"
 
 #####################################################################################################
 if [ "$library_layout" = "PE" ];then
