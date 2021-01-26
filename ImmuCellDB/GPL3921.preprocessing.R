@@ -1,7 +1,7 @@
 
 #!/usr/bin/Rscript --slave
 #### Description:
-     # Convert Raw microarray files profiled in Human Genome Hthgu133a platform into expression values!
+     # Convert Raw microarray files profiled in Human Genome Ht hgu133a platform into expression values!
 
 ################################################################################################################################################
 ###                                         Data Processing for Ht hgu133a
@@ -34,7 +34,6 @@
   save(eset, file=paste(Result.dir, Result.name, ".esetFRMA.customCDF.RData", sep=""))
 
   ###########################################################
-
   # Calculation the global normalized unscaled standard error(GNUSE)
   gnuse <- GNUSE(eset, type = "stat")
   colnames(gnuse)<- sub("_.*", "", colnames(gnuse))
