@@ -20,29 +20,6 @@
   library(hgu133plus2hsentrezg.db)
   library(hgu133plus2frmavecs)
 
-  # Performs the Wilcoxon signed rank-based gene expression presence/absence detection algorithm!
-  # first implemented in the Affymetrix Microarray Suite version 5,The mas5calls method for AffyBatch \n
-  # returns an ExpressionSet with  calls accessible with exprs(obj) and p-values available with assayData(obj)
-  PMA_calls <- function(affydata){
-      # Argument:
-      #     affydata:raw file produced by ReadAffy()
-      #     PMA_file: name of result
-      cat("Starting to calculate PMA calls using mas5calls function......", "\n")       
-      calls <- mas5calls(affydata) 
-      calls <- exprs(calls)
-      stat <- apply(calls, 1, function(x){calls.stat <- table(x); calls.prop <- calls.stat/sum(calls.stat); calls.prop})
-      present <- unlist(lapply(stat, function(x){x["P"]}))
-      marginal <- unlist(lapply(stat, function(x){x["M"]}))
-      absent <- unlist(lapply(stat, function(x){x["A"]}))
-      pma <- data.frame(Present=present,
-                        Absent=absent,
-                        Marginal=marginal
-                       )
-      pma[is.na(pma)==T] <- 0
-      rownames(pma) <- names(stat)
-      pma
-  }
-
   Data <- ReadAffy(cdfname = "hgu133plus2hsentrezgcdf")
   cat("Raw CEL has been successfully read into AffyBatch object!\n")
   saveRDS(Data, file=paste(Result.dir, Result.name, ".AffyData.customCDF.RDS", sep=""), compress=F)
