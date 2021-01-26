@@ -7,6 +7,7 @@
 
   library(mouse4302mmentrezgcdf)
   # mouse4302 mm entrezg cdf version 19.0
+
   library(affy)
   library(frma)
   library(annotate)
@@ -17,34 +18,7 @@
   Result.dir <- as.character(argv[3])
   setwd(Data.dir)
   cat(Result.name, "\n")
-  #Data.dir <- "/gluster/home/chenziyi/ImmuneDatabase/Mouse/Transcriptome/Microarray/Affymetrix/Raw/GPL1261/GPL1261.file12"
-  #Result.name <- "GPL1261.file12"
-  #Result.dir <- "/gluster/home/chenziyi/ImmuneDatabase/Mouse/Transcriptome/Microarray/Affymetrix/Raw/GPL1261/" 
-
-
-  # Performs the Wilcoxon signed rank-based gene expression presence/absence detection algorithm!
-  # first implemented in the Affymetrix Microarray Suite version 5,The mas5calls method for AffyBatch \n
-  # returns an ExpressionSet with  calls accessible with exprs(obj) and p-values available with assayData(obj)
-  PMA_calls <- function(affydata){
-      # Argument:
-      #     affydata:raw file produced by ReadAffy()
-      #     PMA_file: name of result
-      cat("Starting to calculate PMA calls using mas5calls function......", "\n")       
-      calls <- mas5calls(affydata) 
-      calls <- exprs(calls)
-      stat <- apply(calls, 1, function(x){calls.stat <- table(x); calls.prop <- calls.stat/sum(calls.stat); calls.prop})
-      present <- unlist(lapply(stat, function(x){x["P"]}))
-      marginal <- unlist(lapply(stat, function(x){x["M"]}))
-      absent <- unlist(lapply(stat, function(x){x["A"]}))
-      pma <- data.frame(Present=present,
-                        Absent=absent,
-                        Marginal=marginal
-                       )
-      pma[is.na(pma)==T] <- 0
-      rownames(pma) <- names(stat)
-      pma
-  }
-
+ 
   affydata <- ReadAffy(cdfname = "mouse4302mmentrezgcdf")
   save(affydata, file=paste(Result.dir, Result.name, "_AffyData.RData", sep=""))
   cat("ReadAffy has accompanished!\n")
@@ -55,7 +29,6 @@
   save(eset, file = paste(Result.dir, Result.name, "_eset.RData", sep=""))
 
   ###########################################################
-
   # Calculation the global normalized unscaled standard error(GNUSE)
   gnuse <- GNUSE(eset, type = "stat")
   colnames(gnuse)<- sub("_.*", "", colnames(gnuse))
@@ -67,10 +40,6 @@
   write.csv(t(gnuse.selected), file=paste(Result.dir, Result.name, "_gnuse_quatified.csv", sep=""))  
   save(gnuse, gnuse.selected, file = paste(Result.dir, Result.name, "_GNUSE.RData", sep=""))
 
-  # Gene expression presence/absence detection UNDER the mas5calls method!
-  #calls <- PMA_calls(affydata)
-  #save(calls, file=paste(Result.name, "_calls.RData", sep=""))
-  #cat("Presents/absents have called!", "\n")
   rm(affydata)
 
   # Obtain gene expression value
@@ -98,5 +67,3 @@
 
   saveRDS(mapping, expression, expression.knownGene, file=paste(Result.dir, Result.name, ".FinalExpressionFRMA.RDS", sep=""), compress=F)
   write.table(expression.knownGene, file=paste(Result.dir, Result.name, ".ExpressionArray.customCDF.txt", sep=""), sep="\t", col.names=F, row.names=F, quote=FALSE)
-
-
