@@ -1,9 +1,9 @@
 #!/usr/bin/Rscript --slave
 #### Description:
-     # Convert Raw microarray files profiled in Human Genome 133a2 platform into expression values
+     # Convert Raw microarray files profiled in Human Genome Hglue2.0 platform into expression values
 
 ################################################################################################################################################
-###                                         Data Processing for Hgu133a2.0
+###                                         Data Processing for Hglue2.0
 ################################################################################################################################################
 
   cat("********************************************************************************************************************************************\n")
