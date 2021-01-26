@@ -1,11 +1,9 @@
 
 #### Description:
-     # Convert Raw microarray files profiled in Human Genome 133platforms into expression values!
-
-# /gluster/home/chenziyi/software/R/R-3.2.5/bin/R
+     # Convert Raw microarray files profiled in Human Genome hgu133a platforms into expression values!
 
 ################################################################################################################################################
-###                                            Data Processing for Hgu133a.0
+###                                            Data Processing for Hgu133a
 ################################################################################################################################################
 
   cat("********************************************************************************************************************************************\n")
@@ -24,29 +22,6 @@
   library(hgu133ahsentrezgcdf)
   library(hgu133ahsentrezg.db)
   library(hgu133afrmavecs)
-
-  # Performs the Wilcoxon signed rank-based gene expression presence/absence detection algorithm!
-  # first implemented in the Affymetrix Microarray Suite version 5,The mas5calls method for AffyBatch \n
-  # returns an ExpressionSet with  calls accessible with exprs(obj) and p-values available with assayData(obj)
-  PMA_calls <- function(affydata){
-      # Argument:
-      #     affydata:raw file produced by ReadAffy()
-      #     PMA_file: name of result
-      cat("Starting to calculate PMA calls using mas5calls function......", "\n")       
-      calls <- mas5calls(affydata) 
-      calls <- exprs(calls)
-      stat <- apply(calls, 1, function(x){calls.stat <- table(x); calls.prop <- calls.stat/sum(calls.stat); calls.prop})
-      present <- unlist(lapply(stat, function(x){x["P"]}))
-      marginal <- unlist(lapply(stat, function(x){x["M"]}))
-      absent <- unlist(lapply(stat, function(x){x["A"]}))
-      pma <- data.frame(Present=present,
-                        Absent=absent,
-                        Marginal=marginal
-                       )
-      pma[is.na(pma)==T] <- 0
-      rownames(pma) <- names(stat)
-      pma
-  }
  
   Data <- ReadAffy(cdfname = "hgu133ahsentrezgcdf")
   cat("Raw CEL has been successfully read into AffyBatch object!\n")
@@ -93,7 +68,3 @@
 
   saveRDS(mapping, expression, expression.knownGene, file=paste(Result.dir, Result.name, ".FinalExpressionFRMA.RDS", sep=""), compress=F)
   write.table(expression.knownGene, file=paste(Result.dir, Result.name, ".ExpressionArray.customCDF.txt", sep=""), sep="\t", col.names=F, row.names=F, quote=FALSE)
-
-
-
-
