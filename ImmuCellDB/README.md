@@ -1,2 +1,2 @@
 
-This folder contains the R scripts used to pre-process the microarray data.
+This folder contains the R scripts used to pre-process raw microarray data.
