@@ -10,7 +10,7 @@ The scripts used to preprocess the microarray data.
 
 2.tissue_immucc
 ------------------------------------------------------------------------------------------------------
-Tissue specific signature matrix.
+Tissue specific signature matrix developed for tissue_ImmuCC.
 
 
 3.webserver
