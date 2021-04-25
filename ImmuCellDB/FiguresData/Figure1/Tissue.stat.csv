@@ -1,0 +1,84 @@
+Tissue,Sample number,Proportion
+Blood,28025,0.256071709
+Breast,14986,0.136930977
+Brain,7829,0.071535608
+Large intestine,7569,0.06915992
+Bone marrow,6130,0.056011403
+Lung,6091,0.05565505
+Kidney,5436,0.049670145
+Leukemia cell,4270,0.0390161
+Liver,2741,0.025045229
+Ovary,2532,0.023135542
+Adipose,2147,0.019617697
+Skin,1979,0.018082637
+Tissue unknown,1976,0.018055226
+Lymph node,1864,0.017031852
+Stomach,1760,0.016081577
+Bone marrow or blood,1563,0.014281537
+Uterus,999,0.009128123
+Airway,835,0.007629612
+Esophagus,766,0.006999141
+Prostate,645,0.005893533
+Spleen,639,0.005838709
+Muscle,602,0.00550063
+Pancreas,539,0.004924983
+Cervix,531,0.004851885
+Gingiva,523,0.004778787
+Thyroid gland,504,0.004605179
+Soft tissue,472,0.004312787
+Oral cavity,461,0.004212277
+Joint,425,0.003883335
+Heart,407,0.003718865
+Mononuclear cell,406,0.003709728
+Blood vessel,293,0.002677217
+Bone,276,0.002521884
+Adrenal gland,269,0.002457923
+Eye,266,0.002430511
+Nose,263,0.002403099
+Bladder,261,0.002384825
+Small intestine,221,0.002019334
+Testis,168,0.00153506
+Tongue,164,0.001498511
+Limb,155,0.001416275
+Head and neck,149,0.001361452
+Thymus,146,0.00133404
+Larynx,118,0.001078197
+Lymphocyte,112,0.001023373
+Abdomen,96,0.000877177
+Placenta,88,0.000804079
+Ear,60,0.000548236
+Mucosa,55,0.000502549
+Embryo,53,0.000484275
+Intestine,50,0.000456863
+Salivary gland,45,0.000411177
+Trunk wall,44,0.000402039
+Vagina,43,0.000392902
+Other tissues,40,0.00036549
+Omentum,39,0.000356353
+Parotid gland,31,0.000283255
+Plasma,29,0.000264981
+Tonsil,29,0.000264981
+Lacrimal gland,28,0.000255843
+Buffy coat,27,0.000246706
+Umbilical cord,23,0.000210157
+Viscera,19,0.000173608
+Pituitary gland,13,0.000118784
+Trachea,13,0.000118784
+Pleura,12,0.000109647
+Gut-associated lymphoid tissue,10,9.14E-05
+Tooth,10,9.14E-05
+Sinus mucosa,9,8.22E-05
+Gonad,8,7.31E-05
+Bile duct,7,6.40E-05
+Epithelium,7,6.40E-05
+Amnionic fluid,5,4.57E-05
+Aponeurosis,5,4.57E-05
+Palate,5,4.57E-05
+Peritoneum,4,3.65E-05
+Peyer's patch,4,3.65E-05
+Pineal gland,4,3.65E-05
+Ureter,4,3.65E-05
+Pelvic mass,3,2.74E-05
+Sebaceous gland,3,2.74E-05
+Spinal cord,3,2.74E-05
+Small Intestine,1,9.14E-06

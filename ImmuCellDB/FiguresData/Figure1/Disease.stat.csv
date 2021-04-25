@@ -1,0 +1,25 @@
+Disease,Sample number,Proportion
+Neoplasms,58405,0.533661666
+Control,11479,0.104886607
+Certain infectious or parasitic diseases,6176,0.056431717
+Disease of unknown origin,10180,0.093017306
+"Injury, poisoning or certain other consequences of external causes",4983,0.045530966
+Diseases of the digestive system,2724,0.024889896
+Factors influencing health status or contact with health services,2620,0.023939621
+Diseases of the nervous system,2225,0.020330403
+Diseases of the respiratory system,2223,0.020312129
+Diseases of the musculoskeletal system or connective tissue,1845,0.016858245
+Diseases of the immune system,1663,0.015195263
+Diseases of the genitourinary system,997,0.009109848
+Diseases of the circulatory system,905,0.00826922
+"Endocrine, nutritional or metabolic diseases",881,0.008049926
+Diseases of the skin,713,0.006514866
+"Mental, behavioural or neurodevelopmental disorders",450,0.004111767
+Other groups,292,0.00266808
+"Pregnancy, childbirth or the puerperium",266,0.002430511
+"Symptoms, signs or clinical findings, not elsewhere classified",171,0.001562471
+Developmental anomalies,121,0.001105608
+Diseases of the blood or blood-forming organs,81,0.000740118
+Sleep-wake disorders,17,0.000155333
+Diseases of the visual system,13,0.000118784
+Conditions related to sexual health,12,0.000109647
