@@ -1,7 +1,6 @@
 ################################################################################################################################################
 ###                                          Data Processing for Hgu133 plus 2.0
 ################################################################################################################################################
-
   cat("********************************************************************************************************************************************\n")
   argv <- commandArgs(TRUE)
   options(stringsAsFactors=F)
@@ -29,9 +28,8 @@
   cat("FRMA normalization has accompanished!\n")
   saveRDS(eset, file=paste(Result.dir, Result.name, ".esetFRMA.customCDF.RDS", sep=""), compress=F)
 
-  ###########################################################
-
-  # Calculation the global normalized unscaled standard error(GNUSE)
+###########################################################
+# Calculation the global normalized unscaled standard error(GNUSE)
   gnuse <- GNUSE(eset, type = "stat")
   colnames(gnuse)<- sub("_.*", "", colnames(gnuse))
   colnames(gnuse) <- sub("\\..*", "", colnames(gnuse))
