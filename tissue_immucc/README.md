@@ -27,10 +27,8 @@ This repository contains a brief introduction on how to run the tissue specific 
  ------------------------------------------------------------------------------------------------------
   E.g. when estimating the immune cell constitution from the transcriptome data of lung, the lung specific signature matrix   `”Lung.sig.matrix.csv”` is used in parameter `training_data`.
   
-`* expression: matrix of sample expression profile;`
-`* traing_data：training signature matrix`
-
- Immune.proportion <- ImmuCC (expression, training_data = ”Lung.sig.matrix.csv”)`
+* expression: matrix of sample expression profile; traing_data：training signature matrix\n
+ `Immune.proportion <- ImmuCC (expression, training_data = ”Lung.sig.matrix.csv”)`
 
 3.Output result
 --------------------------------------------------------------------------------------------------------
